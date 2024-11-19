@@ -1,17 +1,8 @@
 {
   "solution": {
     "prettier-plugin-ember-template-tag": {
-      "impact": "patch",
-      "oldVersion": "2.0.3",
-      "newVersion": "2.0.4",
-      "constraints": [
-        {
-          "impact": "patch",
-          "reason": "Appears in changelog section :bug: Bug Fix"
-        }
-      ],
-      "pkgJSONPath": "./package.json"
+      "oldVersion": "2.0.4"
     }
   },
-  "description": "## Release (2024-11-06)\n\nprettier-plugin-ember-template-tag 2.0.4 (patch)\n\n#### :bug: Bug Fix\n* `prettier-plugin-ember-template-tag`\n  * [#284](https://github.com/ember-tooling/prettier-plugin-ember-template-tag/pull/284) Add prepack so that this library builds before publish ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### Committers: 1\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n"
+  "description": "\n\n\n\n"
 }
