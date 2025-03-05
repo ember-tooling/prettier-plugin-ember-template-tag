@@ -12,8 +12,8 @@ importers:
         specifier: ^7.23.6
         version: 7.26.0
       content-tag:
-        specifier: ^2.0.1
-        version: 2.0.1
+        specifier: ^3.1.1
+        version: 3.1.1
       prettier:
         specifier: ^3.1.1
         version: 3.1.1
@@ -1988,8 +1988,8 @@ packages:
       proto-list: 1.2.4
     dev: true
 
-  /content-tag@2.0.1:
-    resolution: {integrity: sha512-jxsETSDs5NbNwyiDuIp672fUMhUyu8Qxc5MOBOJOcgW/fQESI6o5K1LBDrnEE7Bh810a685lWEZHTF4jQYGEEw==}
+  /content-tag@3.1.1:
+    resolution: {integrity: sha512-94puwVk6X8oJcbRIEY03UM80zWzA3dYgGkOiRJzeY1vXgwrFUh3OolDDi/D7YBa6Vsx+CgAvuk4uXlB8loZ1FA==}
     dev: false
 
   /convert-source-map@2.0.0:
