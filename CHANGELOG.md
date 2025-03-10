@@ -1,5 +1,10 @@
 # Changelog
 
+
+
+
+
+
 ## Release (2024-11-06)
 
 prettier-plugin-ember-template-tag 2.0.4 (patch)
