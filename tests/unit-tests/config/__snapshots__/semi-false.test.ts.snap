@@ -401,6 +401,30 @@ class MyComponent extends Component<Signature> {
 "
 `;
 
+exports[`config > semi: false > it formats ../cases/gts/component-class-with-unicode-character.gts 1`] = `
+"import Component from "@glimmer/component"
+
+export interface Signature {
+  Element: HTMLElement
+  Args: {}
+  Yields: []
+}
+
+/** It's a component */
+class MyComponent extends Component<Signature> {
+  <template>✓</template>
+}
+
+function hello() {
+  return "Hello"
+}
+
+function world() {
+  return "World"
+}
+"
+`;
+
 exports[`config > semi: false > it formats ../cases/gts/default-export.gts 1`] = `
 "import type { TemplateOnlyComponent } from "@ember/component/template-only"
 
