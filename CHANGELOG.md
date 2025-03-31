@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2025-03-31)
+
+prettier-plugin-ember-template-tag 2.0.5 (patch)
+
+#### :bug: Bug Fix
+* `prettier-plugin-ember-template-tag`
+  * [#341](https://github.com/ember-tooling/prettier-plugin-ember-template-tag/pull/341) Fix implied export default with satisfies ([@ef4](https://github.com/ef4))
+
+#### Committers: 1
+- Edward Faulkner ([@ef4](https://github.com/ef4))
+
 ## Release (2024-11-06)
 
 prettier-plugin-ember-template-tag 2.0.4 (patch)
