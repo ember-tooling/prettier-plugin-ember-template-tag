@@ -1,5 +1,5 @@
 import type { TemplateOnlyComponent } from '@ember/component/template-only';
 
 <template>
-  what
+  Implied Export Default with Satisfies
 </template> satisfies TemplateOnlyComponent;
