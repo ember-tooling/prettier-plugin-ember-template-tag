@@ -453,6 +453,15 @@ export const Exported = <template>
 "
 `;
 
+exports[`config > templateExportDefault: true > it formats ../cases/gts/implied-export-default-satisfies.gts 1`] = `
+"import type { TemplateOnlyComponent } from "@ember/component/template-only";
+
+<template>
+  Implied Export Default with Satisfies
+</template> satisfies TemplateOnlyComponent;
+"
+`;
+
 exports[`config > templateExportDefault: true > it formats ../cases/gts/issue-191.gts 1`] = `
 "import Component from "@glimmer/component";
 

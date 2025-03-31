@@ -71,7 +71,7 @@ export function preprocessTemplateRange(
     suffix = '*/}';
 
     const nextToken = code.slice(template.range.end).toString().match(/\S+/);
-    if (nextToken && nextToken[0] === 'as') {
+    if (nextToken && (nextToken[0] === 'as' || nextToken[0] === 'satisfies')) {
       // Replace with parenthesized ObjectExpression
       prefix = '(' + prefix;
       suffix = suffix + ')';
