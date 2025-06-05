@@ -2,16 +2,20 @@
   "solution": {
     "prettier-plugin-ember-template-tag": {
       "impact": "patch",
-      "oldVersion": "2.0.4",
-      "newVersion": "2.0.5",
+      "oldVersion": "2.0.5",
+      "newVersion": "2.0.6",
       "constraints": [
         {
           "impact": "patch",
           "reason": "Appears in changelog section :bug: Bug Fix"
+        },
+        {
+          "impact": "patch",
+          "reason": "Appears in changelog section :house: Internal"
         }
       ],
       "pkgJSONPath": "./package.json"
     }
   },
-  "description": "## Release (2025-03-31)\n\nprettier-plugin-ember-template-tag 2.0.5 (patch)\n\n#### :bug: Bug Fix\n* `prettier-plugin-ember-template-tag`\n  * [#341](https://github.com/ember-tooling/prettier-plugin-ember-template-tag/pull/341) Fix implied export default with satisfies ([@ef4](https://github.com/ef4))\n\n#### Committers: 1\n- Edward Faulkner ([@ef4](https://github.com/ef4))\n"
+  "description": "## Release (2025-06-05)\n\nprettier-plugin-ember-template-tag 2.0.6 (patch)\n\n#### :bug: Bug Fix\n* `prettier-plugin-ember-template-tag`\n  * [#361](https://github.com/ember-tooling/prettier-plugin-ember-template-tag/pull/361) Only publish the dist directory ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### :house: Internal\n* `prettier-plugin-ember-template-tag`\n  * [#345](https://github.com/ember-tooling/prettier-plugin-ember-template-tag/pull/345) Add .npmignore so we publish only the built library ([@SergeAstapov](https://github.com/SergeAstapov))\n\n#### Committers: 2\n- Sergey Astapov ([@SergeAstapov](https://github.com/SergeAstapov))\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n"
 }

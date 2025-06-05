@@ -1,5 +1,21 @@
 # Changelog
 
+## Release (2025-06-05)
+
+prettier-plugin-ember-template-tag 2.0.6 (patch)
+
+#### :bug: Bug Fix
+* `prettier-plugin-ember-template-tag`
+  * [#361](https://github.com/ember-tooling/prettier-plugin-ember-template-tag/pull/361) Only publish the dist directory ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### :house: Internal
+* `prettier-plugin-ember-template-tag`
+  * [#345](https://github.com/ember-tooling/prettier-plugin-ember-template-tag/pull/345) Add .npmignore so we publish only the built library ([@SergeAstapov](https://github.com/SergeAstapov))
+
+#### Committers: 2
+- Sergey Astapov ([@SergeAstapov](https://github.com/SergeAstapov))
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
 ## Release (2025-03-31)
 
 prettier-plugin-ember-template-tag 2.0.5 (patch)
