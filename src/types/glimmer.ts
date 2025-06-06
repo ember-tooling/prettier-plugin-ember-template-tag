@@ -7,7 +7,8 @@ import type {
   StaticBlock,
   TSAsExpression,
 } from '@babel/types';
-import type { Parsed as RawGlimmerTemplate } from 'content-tag';
+
+import type { ContentTag } from '../utils/content-tag.js';
 
 type GlimmerTemplateProperties = (
   | BlockStatement
@@ -28,7 +29,7 @@ type GlimmerTemplateProperties = (
 
   extra: {
     isGlimmerTemplate: true;
-    template: RawGlimmerTemplate;
+    template: ContentTag;
     [key: string]: unknown;
   };
 };
