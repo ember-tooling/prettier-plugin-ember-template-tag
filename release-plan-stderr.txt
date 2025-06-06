@@ -1,0 +1,7 @@
+# Unlabeled Changes
+
+* `prettier-plugin-ember-template-tag`
+  * [#363](https://github.com/ember-tooling/prettier-plugin-ember-template-tag/pull/363) Refactored code ([@ijlee2](https://github.com/ijlee2))
+
+
+*Cannot plan release until the above changes are labeled*.
