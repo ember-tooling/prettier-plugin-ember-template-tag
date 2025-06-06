@@ -1,37 +1,15 @@
-# Specific to prettierignore
+# compiled output
+/dist/
+ 
+# misc
+!.*
+.*/
 pnpm-lock.yaml
-**/*/pnpm-lock.yaml
-tests/__snapshots__
-tests/cases
+
+# specific to this package
+/examples/
+/tests/__snapshots__/
+/tests/cases/
 CHANGELOG.md
-examples
-
-# Everything below this point should match gitignore
-
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
-
-node_modules
-dist
-dist-ssr
-*.local
-.eslintcache
-.npmrc
-
-# Editor directories and files
-.idea
-.DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
-*.yml
-*.yaml
-*.md
+README.md
+RELEASE.md
