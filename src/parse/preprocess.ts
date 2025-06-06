@@ -1,3 +1,5 @@
+import { Preprocessor } from 'content-tag';
+
 export interface Template {
   contents: string;
   type: string;
@@ -13,7 +15,7 @@ export interface Template {
 
 const BufferMap: Map<string, Buffer> = new Map();
 
-export const PLACEHOLDER = '~';
+const PLACEHOLDER = '~';
 
 function getBuffer(s: string): Buffer {
   let buf = BufferMap.get(s);
@@ -25,19 +27,19 @@ function getBuffer(s: string): Buffer {
 }
 
 /** Slice string using byte range */
-export function sliceByteRange(s: string, a: number, b?: number): string {
+function sliceByteRange(s: string, a: number, b?: number): string {
   const buf = getBuffer(s);
   return buf.subarray(a, b).toString();
 }
 
 /** Converts byte index to js char index (utf16) */
-export function byteToCharIndex(s: string, byteOffset: number): number {
+function byteToCharIndex(s: string, byteOffset: number): number {
   const buf = getBuffer(s);
   return buf.subarray(0, byteOffset).toString().length;
 }
 
 /** Calculate byte length */
-export function byteLength(s: string): number {
+function byteLength(s: string): number {
   return getBuffer(s).length;
 }
 
@@ -71,6 +73,7 @@ export function preprocessTemplateRange(
     suffix = '*/}';
 
     const nextToken = code.slice(template.range.end).toString().match(/\S+/);
+
     if (nextToken && (nextToken[0] === 'as' || nextToken[0] === 'satisfies')) {
       // Replace with parenthesized ObjectExpression
       prefix = '(' + prefix;
@@ -81,9 +84,52 @@ export function preprocessTemplateRange(
   // We need to replace forward slash with _something else_, because
   // forward slash breaks the parsed templates.
   const content = template.contents.replaceAll('/', PLACEHOLDER);
+
   const tplLength = template.range.end - template.range.start;
   const spaces =
     tplLength - byteLength(content) - prefix.length - suffix.length;
   const total = prefix + content + ' '.repeat(spaces) + suffix;
+
   return replaceRange(code, template.range.start, template.range.end, total);
+}
+
+const p = new Preprocessor();
+
+/** Pre-processes the template info, parsing the template content to Glimmer AST. */
+export function codeToGlimmerAst(code: string, filename: string): Template[] {
+  const rawTemplates = p.parse(code, { filename });
+
+  const templates: Template[] = rawTemplates.map((r) => ({
+    type: r.type,
+    range: r.range,
+    contentRange: r.contentRange,
+    contents: r.contents,
+    utf16Range: {
+      start: byteToCharIndex(code, r.range.start),
+      end: byteToCharIndex(code, r.range.end),
+    },
+  }));
+
+  return templates;
+}
+
+/**
+ * Pre-processes the template info, parsing the template content to Glimmer AST,
+ * fixing the offsets and locations of all nodes also calculates the block
+ * params locations & ranges and adding it to the info
+ */
+export function preprocess(
+  code: string,
+  fileName: string,
+): {
+  code: string;
+  templates: Template[];
+} {
+  const templates = codeToGlimmerAst(code, fileName);
+
+  for (const template of templates) {
+    code = preprocessTemplateRange(template, code);
+  }
+
+  return { templates, code };
 }

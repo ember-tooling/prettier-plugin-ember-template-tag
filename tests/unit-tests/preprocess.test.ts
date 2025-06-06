@@ -1,8 +1,7 @@
 import { describe, expect, test } from 'vitest';
 
-import { codeToGlimmerAst } from '../../src/parse/index.js';
 import {
-  PLACEHOLDER,
+  codeToGlimmerAst,
   preprocessTemplateRange,
 } from '../../src/parse/preprocess.js';
 
@@ -13,21 +12,19 @@ const TEST_CASES = [
   },
   {
     code: '<template>/* hi */</template>',
-    expected: [`{/*${PLACEHOLDER}* hi *${PLACEHOLDER}               */}`],
+    expected: [`{/*~* hi *~               */}`],
   },
   {
     code: '<template><div>hi</div></template>',
-    expected: [`{/*<div>hi<${PLACEHOLDER}div>               */}`],
+    expected: [`{/*<div>hi<~div>               */}`],
   },
   {
     code: '<template>{{#if true}}hi{{/if}}</template>',
-    expected: [`{/*{{#if true}}hi{{${PLACEHOLDER}if}}               */}`],
+    expected: [`{/*{{#if true}}hi{{~if}}               */}`],
   },
   {
     code: '<template>////////////////</template>',
-    expected: [
-      `{/*${PLACEHOLDER}${PLACEHOLDER}${PLACEHOLDER}${PLACEHOLDER}${PLACEHOLDER}${PLACEHOLDER}${PLACEHOLDER}${PLACEHOLDER}${PLACEHOLDER}${PLACEHOLDER}${PLACEHOLDER}${PLACEHOLDER}${PLACEHOLDER}${PLACEHOLDER}${PLACEHOLDER}${PLACEHOLDER}               */}`,
-    ],
+    expected: [`{/*~~~~~~~~~~~~~~~~               */}`],
   },
   {
     code: '<template>💩</template>',
