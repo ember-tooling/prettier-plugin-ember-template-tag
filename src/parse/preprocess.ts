@@ -1,3 +1,5 @@
+import { Preprocessor } from 'content-tag';
+
 export interface Template {
   contents: string;
   type: string;
@@ -86,4 +88,44 @@ export function preprocessTemplateRange(
     tplLength - byteLength(content) - prefix.length - suffix.length;
   const total = prefix + content + ' '.repeat(spaces) + suffix;
   return replaceRange(code, template.range.start, template.range.end, total);
+}
+
+const p = new Preprocessor();
+
+/** Pre-processes the template info, parsing the template content to Glimmer AST. */
+export function codeToGlimmerAst(code: string, filename: string): Template[] {
+  const rawTemplates = p.parse(code, { filename });
+  const templates: Template[] = rawTemplates.map((r) => ({
+    type: r.type,
+    range: r.range,
+    contentRange: r.contentRange,
+    contents: r.contents,
+    utf16Range: {
+      start: byteToCharIndex(code, r.range.start),
+      end: byteToCharIndex(code, r.range.end),
+    },
+  }));
+
+  return templates;
+}
+
+/**
+ * Pre-processes the template info, parsing the template content to Glimmer AST,
+ * fixing the offsets and locations of all nodes also calculates the block
+ * params locations & ranges and adding it to the info
+ */
+export function preprocess(
+  code: string,
+  fileName: string,
+): {
+  code: string;
+  templates: Template[];
+} {
+  const templates = codeToGlimmerAst(code, fileName);
+
+  for (const template of templates) {
+    code = preprocessTemplateRange(template, code);
+  }
+
+  return { templates, code };
 }

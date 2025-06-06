@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest';
 
-import { codeToGlimmerAst } from '../../src/parse/index.js';
 import {
+  codeToGlimmerAst,
   PLACEHOLDER,
   preprocessTemplateRange,
 } from '../../src/parse/preprocess.js';

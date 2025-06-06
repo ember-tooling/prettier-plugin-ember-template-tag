@@ -6,21 +6,15 @@ import type {
   ObjectExpression,
   StaticBlock,
 } from '@babel/types';
-import { Preprocessor } from 'content-tag';
 import type { Parser } from 'prettier';
 import { parsers as babelParsers } from 'prettier/plugins/babel.js';
 
 import { PRINTER_NAME } from '../config.js';
 import type { Options } from '../options.js';
 import { assert } from '../utils/assert.js';
-import {
-  byteToCharIndex,
-  preprocessTemplateRange,
-  type Template,
-} from './preprocess.js';
+import { preprocess, type Template } from './preprocess.js';
 
 const typescript = babelParsers['babel-ts'] as Parser<Node | undefined>;
-const p = new Preprocessor();
 
 /** Converts a node into a GlimmerTemplate node */
 function convertNode(
@@ -87,27 +81,6 @@ function convertAst(ast: File, templates: Template[]): void {
   }
 }
 
-/**
- * Pre-processes the template info, parsing the template content to Glimmer AST,
- * fixing the offsets and locations of all nodes also calculates the block
- * params locations & ranges and adding it to the info
- */
-export function preprocess(
-  code: string,
-  fileName: string,
-): {
-  code: string;
-  templates: Template[];
-} {
-  const templates = codeToGlimmerAst(code, fileName);
-
-  for (const template of templates) {
-    code = preprocessTemplateRange(template, code);
-  }
-
-  return { templates, code };
-}
-
 export const parser: Parser<Node | undefined> = {
   ...typescript,
   astFormat: PRINTER_NAME,
@@ -120,20 +93,3 @@ export const parser: Parser<Node | undefined> = {
     return ast;
   },
 };
-
-/** Pre-processes the template info, parsing the template content to Glimmer AST. */
-export function codeToGlimmerAst(code: string, filename: string): Template[] {
-  const rawTemplates = p.parse(code, { filename });
-  const templates: Template[] = rawTemplates.map((r) => ({
-    type: r.type,
-    range: r.range,
-    contentRange: r.contentRange,
-    contents: r.contents,
-    utf16Range: {
-      start: byteToCharIndex(code, r.range.start),
-      end: byteToCharIndex(code, r.range.end),
-    },
-  }));
-
-  return templates;
-}
