@@ -30,29 +30,34 @@ function convertNode(
 
 /** Traverses the AST and replaces the transformed template parts with other AST */
 function convertAst(ast: File, templates: Template[]): void {
-  const unprocessedTemplates = [...templates];
-
   traverse(ast, {
     enter(path) {
       const { node } = path;
-      if (
-        node.type === 'BlockStatement' ||
-        node.type === 'ObjectExpression' ||
-        node.type === 'StaticBlock'
-      ) {
-        const { range } = node;
-        assert('expected range', range);
-        const [start, end] = range;
+      // eslint-disable-next-line @typescript-eslint/switch-exhaustiveness-check
+      switch (node.type) {
+        case 'BlockStatement':
+        case 'ObjectExpression':
+        case 'StaticBlock': {
+          assert('expected range', node.range);
+          const [start, end] = node.range;
 
-        const templateIndex = unprocessedTemplates.findIndex(
-          (t) =>
-            (t.utf16Range.start === start && t.utf16Range.end === end) ||
-            (node.type === 'ObjectExpression' &&
-              t.utf16Range.start === start - 1 &&
-              t.utf16Range.end === end + 1),
-        );
-        if (templateIndex > -1) {
-          const rawTemplate = unprocessedTemplates.splice(templateIndex, 1)[0];
+          const templateIndex = templates.findIndex((template) => {
+            const { utf16Range } = template;
+
+            if (utf16Range.start === start && utf16Range.end === end) {
+              return true;
+            }
+
+            return (
+              node.type === 'ObjectExpression' &&
+              utf16Range.start === start - 1 &&
+              utf16Range.end === end + 1
+            );
+          });
+          if (templateIndex === -1) {
+            return null;
+          }
+          const rawTemplate = templates.splice(templateIndex, 1)[0];
           if (!rawTemplate) {
             throw new Error(
               'expected raw template because splice index came from findIndex',
@@ -65,8 +70,6 @@ function convertAst(ast: File, templates: Template[]): void {
             ast.comments.splice(index, 1);
           }
           convertNode(node, rawTemplate);
-        } else {
-          return null;
         }
       }
 
@@ -74,9 +77,9 @@ function convertAst(ast: File, templates: Template[]): void {
     },
   });
 
-  if (unprocessedTemplates.length > 0) {
+  if (templates.length > 0) {
     throw new Error(
-      `failed to process all templates, ${unprocessedTemplates.length} remaining`,
+      `failed to process all templates, ${templates.length} remaining`,
     );
   }
 }
