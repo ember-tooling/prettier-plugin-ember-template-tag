@@ -12,7 +12,7 @@ import { parsers as babelParsers } from 'prettier/plugins/babel.js';
 
 import { PRINTER_NAME } from '../config.js';
 import type { Options } from '../options.js';
-import { assert } from '../utils/index.js';
+import { assert } from '../utils/assert.js';
 import {
   byteToCharIndex,
   preprocessTemplateRange,

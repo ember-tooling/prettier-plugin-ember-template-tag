@@ -13,7 +13,7 @@ import {
   isGlimmerTemplate,
   isGlimmerTemplateParent,
 } from '../types/glimmer.js';
-import { assert } from '../utils/index.js';
+import { assert } from '../utils/assert.js';
 import {
   fixPreviousPrint,
   saveCurrentPrintOnSiblingNode,
