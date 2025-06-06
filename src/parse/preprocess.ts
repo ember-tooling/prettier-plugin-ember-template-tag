@@ -15,7 +15,7 @@ export interface Template {
 
 const BufferMap: Map<string, Buffer> = new Map();
 
-export const PLACEHOLDER = '~';
+const PLACEHOLDER = '~';
 
 function getBuffer(s: string): Buffer {
   let buf = BufferMap.get(s);
@@ -27,19 +27,19 @@ function getBuffer(s: string): Buffer {
 }
 
 /** Slice string using byte range */
-export function sliceByteRange(s: string, a: number, b?: number): string {
+function sliceByteRange(s: string, a: number, b?: number): string {
   const buf = getBuffer(s);
   return buf.subarray(a, b).toString();
 }
 
 /** Converts byte index to js char index (utf16) */
-export function byteToCharIndex(s: string, byteOffset: number): number {
+function byteToCharIndex(s: string, byteOffset: number): number {
   const buf = getBuffer(s);
   return buf.subarray(0, byteOffset).toString().length;
 }
 
 /** Calculate byte length */
-export function byteLength(s: string): number {
+function byteLength(s: string): number {
   return getBuffer(s).length;
 }
 
