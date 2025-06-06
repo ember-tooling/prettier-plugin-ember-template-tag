@@ -33,6 +33,7 @@ function convertAst(ast: File, templates: Template[]): void {
   traverse(ast, {
     enter(path) {
       const { node } = path;
+
       // eslint-disable-next-line @typescript-eslint/switch-exhaustiveness-check
       switch (node.type) {
         case 'BlockStatement':
@@ -54,21 +55,27 @@ function convertAst(ast: File, templates: Template[]): void {
               utf16Range.end === end + 1
             );
           });
+
           if (templateIndex === -1) {
             return null;
           }
+
           const rawTemplate = templates.splice(templateIndex, 1)[0];
+
           if (!rawTemplate) {
             throw new Error(
               'expected raw template because splice index came from findIndex',
             );
           }
+
           const index =
             node.innerComments?.[0] &&
             ast.comments?.indexOf(node.innerComments[0]);
+
           if (ast.comments && index !== undefined && index >= 0) {
             ast.comments.splice(index, 1);
           }
+
           convertNode(node, rawTemplate);
         }
       }
@@ -90,9 +97,11 @@ export const parser: Parser<Node | undefined> = {
 
   async parse(code: string, options: Options): Promise<Node> {
     const preprocessed = preprocess(code, options.filepath);
+
     const ast = await typescript.parse(preprocessed.code, options);
     assert('expected ast', ast);
     convertAst(ast as File, preprocessed.templates);
+
     return ast;
   },
 };

@@ -73,6 +73,7 @@ export function preprocessTemplateRange(
     suffix = '*/}';
 
     const nextToken = code.slice(template.range.end).toString().match(/\S+/);
+
     if (nextToken && (nextToken[0] === 'as' || nextToken[0] === 'satisfies')) {
       // Replace with parenthesized ObjectExpression
       prefix = '(' + prefix;
@@ -83,10 +84,12 @@ export function preprocessTemplateRange(
   // We need to replace forward slash with _something else_, because
   // forward slash breaks the parsed templates.
   const content = template.contents.replaceAll('/', PLACEHOLDER);
+
   const tplLength = template.range.end - template.range.start;
   const spaces =
     tplLength - byteLength(content) - prefix.length - suffix.length;
   const total = prefix + content + ' '.repeat(spaces) + suffix;
+
   return replaceRange(code, template.range.start, template.range.end, total);
 }
 
@@ -95,6 +98,7 @@ const p = new Preprocessor();
 /** Pre-processes the template info, parsing the template content to Glimmer AST. */
 export function codeToGlimmerAst(code: string, filename: string): Template[] {
   const rawTemplates = p.parse(code, { filename });
+
   const templates: Template[] = rawTemplates.map((r) => ({
     type: r.type,
     range: r.range,
