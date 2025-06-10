@@ -326,7 +326,7 @@ export default class ProjectStatusComponent extends Component<ProjectStatusSig> 
     </Button>
   </template>
 
-  @service private declare server: ServerService
+  @service declare private server: ServerService
 
   private get iconType(): "mini" {
     return "mini"
