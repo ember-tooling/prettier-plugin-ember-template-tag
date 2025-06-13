@@ -7,13 +7,13 @@ import type {
 } from 'prettier';
 import { printers as estreePrinters } from 'prettier/plugins/estree.js';
 
-import { TEMPLATE_TAG_CLOSE, TEMPLATE_TAG_OPEN } from '../config.js';
 import type { Options } from '../options.js';
 import {
   isGlimmerTemplate,
   isGlimmerTemplateParent,
 } from '../types/glimmer.js';
 import { assert } from '../utils/assert.js';
+import { TEMPLATE_TAG_CLOSE, TEMPLATE_TAG_OPEN } from '../utils/index.js';
 import {
   fixPreviousPrint,
   saveCurrentPrintOnSiblingNode,

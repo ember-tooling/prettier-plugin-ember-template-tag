@@ -1,10 +1,10 @@
 import type { Options as PrettierOptions } from 'prettier';
 import { doc } from 'prettier';
 
-import { TEMPLATE_TAG_CLOSE, TEMPLATE_TAG_OPEN } from '../config.js';
 import type { Options } from '../options.js';
 import { getTemplateSingleQuote } from '../options.js';
 import { flattenDoc } from '../utils/doc.js';
+import { TEMPLATE_TAG_CLOSE, TEMPLATE_TAG_OPEN } from '../utils/index.js';
 
 const {
   builders: { group, hardline, indent, softline },
