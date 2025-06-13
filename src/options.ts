@@ -18,18 +18,6 @@ const templateExportDefault: BooleanSupportOption = {
   type: 'boolean',
 };
 
-/**
- * Extracts a valid `templateSingleQuote` option out of the provided options. If
- * `templateSingleQuote` is defined, it will be used, otherwise the value for
- * `singleQuote` will be inherited.
- */
-export function getTemplateSingleQuote(options: PluginOptions): boolean {
-  const { singleQuote, templateSingleQuote } = options;
-  return typeof templateSingleQuote === 'boolean'
-    ? templateSingleQuote
-    : singleQuote;
-}
-
 const templateSingleQuote: BooleanSupportOption = {
   category: 'Format',
   description:
