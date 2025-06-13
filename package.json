@@ -27,24 +27,20 @@
     "email": "kmenne@gmail.com"
   },
   "type": "module",
-  "main": "dist/prettier-plugin-ember-template-tag.js",
+  "main": "dist/src/main.js",
   "scripts": {
-    "build": "tsc && vite build",
-    "example": "pnpm preexample && cd examples && pnpm example",
+    "build": "./build.sh --production",
     "format": "prettier --cache --write .",
     "lint": "concurrently \"pnpm:lint:*(!fix)\" --names \"lint:\" --prefix-colors auto && pnpm lint:format",
     "lint:js": "eslint . --cache",
     "lint:js:fix": "eslint . --fix",
     "lint:fix": "concurrently \"pnpm:lint:*:fix\" --names \"fix:\" --prefix-colors auto && pnpm format",
     "lint:format": "prettier --cache --check .",
-    "lint:types": "tsc --project tsconfig.lint.json",
+    "lint:types": "tsc --noEmit",
     "prepack": "pnpm build",
-    "preexample": "vite build",
-    "test": "vitest",
-    "test:all": "concurrently \"pnpm:test:run\" \"pnpm:test:example\" --prefix-colors auto",
-    "test:example": "pnpm preexample && cd examples && pnpm test",
-    "test:run": "vitest run",
-    "test:ui": "vitest --ui"
+    "test": "concurrently \"pnpm:test:*\" --names \"test:\" --prefix-colors auto",
+    "test:fixtures": "./build.sh --test && mt dist-for-testing --quiet",
+    "test:vitest": "vitest run --exclude dist-for-testing --exclude tests"
   },
   "dependencies": {
     "@babel/core": "^7.27.4",
@@ -53,7 +49,10 @@
   "devDependencies": {
     "@babel/eslint-parser": "^7.27.5",
     "@babel/types": "^7.27.6",
+    "@codemod-utils/files": "^3.0.2",
+    "@codemod-utils/tests": "^2.0.1",
     "@eslint/js": "^9.28.0",
+    "@sondr3/minitest": "^0.1.2",
     "@tsconfig/node18": "^18.2.4",
     "@tsconfig/strictest": "^2.0.5",
     "@types/babel__core": "^7.20.5",
@@ -61,7 +60,6 @@
     "@typescript-eslint/eslint-plugin": "^8.34.0",
     "@typescript-eslint/parser": "^8.34.0",
     "@vitest/eslint-plugin": "^1.2.4",
-    "@vitest/ui": "^3.2.3",
     "concurrently": "^9.1.2",
     "eslint": "^9.28.0",
     "eslint-config-prettier": "^10.1.5",
@@ -75,7 +73,6 @@
     "release-plan": "^0.11.0",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.34.0",
-    "vite": "^6.3.5",
     "vitest": "^3.2.3"
   },
   "peerDependencies": {

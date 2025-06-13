@@ -1,12 +1,25 @@
+# compiled output
+/dist-for-testing/
+/tmp/
+
+# dependencies
+/node_modules/
+
+# misc
+/.DS_Store
+/.env*
+/.eslintcache
+/.git/
 /.github/
-/.vscode/
-/examples/
-/src/
-/tests/
 /.gitignore
+/.pnpm-debug.log
 /.prettierignore
 /.release-it.json
 /.release-plan.json
+/.vscode/
+/src/
+/tests/
+/tests-vitest/
 /CODE_OF_CONDUCT.md
 /CONTRIBUTING.md
 /RELEASE.md
@@ -17,6 +30,5 @@
 /pnpm-lock.yaml
 /pnpm-workspace.yaml
 /prettier.config.mjs
+/tsconfig.build.json
 /tsconfig.json
-/tsconfig.lint.json
-/vite.config.ts

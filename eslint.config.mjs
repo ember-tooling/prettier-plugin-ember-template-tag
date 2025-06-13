@@ -27,7 +27,6 @@ const customRules = {
   rules: {
     'jsdoc/check-param-names': 'off',
     'jsdoc/newline-after-description': 'off',
-    'jsdoc/require-jsdoc': ['error', { publicOnly: true }],
     'jsdoc/require-param': 'off',
     'jsdoc/require-param-type': 'off',
     'jsdoc/require-returns': 'off',
@@ -55,11 +54,12 @@ export default tseslint.config(
   {
     ignores: [
       'dist/',
+      'dist-for-testing/',
       'node_modules/',
+      'tests-vitest/__snapshots__/',
+      'tests-vitest/cases/',
+      'tmp/',
       '.*/',
-      'tests/__snapshots__/',
-      'tests/cases/',
-      'vite.config.ts',
     ],
   },
   {

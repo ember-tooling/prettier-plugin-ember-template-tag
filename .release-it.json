@@ -14,7 +14,7 @@
     "tokenRef": "GITHUB_AUTH"
   },
   "hooks": {
-    "before:init": ["npm run lint", "npm run test:run"],
+    "before:init": ["npm run lint", "npm run test"],
     "after:bump": "npm run build",
     "after:release": "echo Successfully released ${name} v${version} to ${repo.repository}."
   }
