@@ -3,12 +3,8 @@ import {
   type Parsed as ContentTag,
   Preprocessor,
   type PreprocessorOptions,
+  type Range,
 } from 'content-tag';
-
-type Range = {
-  end: number;
-  start: number;
-};
 
 const BufferMap = new Map<string, Buffer>();
 
@@ -42,9 +38,9 @@ export function replaceContents(
   const { contents, range } = options;
 
   return [
-    sliceByteRange(file, 0, range.start),
+    sliceByteRange(file, 0, range.startByte),
     contents,
-    sliceByteRange(file, range.end),
+    sliceByteRange(file, range.endByte),
   ].join('');
 }
 
