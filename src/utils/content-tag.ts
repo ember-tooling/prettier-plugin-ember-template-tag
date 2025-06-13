@@ -1,14 +1,10 @@
-/* eslint-disable @typescript-eslint/consistent-type-definitions, eslint-comments/disable-enable-pair, jsdoc/require-jsdoc, unicorn/prefer-export-from */
+/* eslint-disable jsdoc/require-jsdoc, unicorn/prefer-export-from */
 import {
   type Parsed as ContentTag,
   Preprocessor,
   type PreprocessorOptions,
+  type Range,
 } from 'content-tag';
-
-type Range = {
-  end: number;
-  start: number;
-};
 
 const BufferMap = new Map<string, Buffer>();
 
@@ -42,9 +38,9 @@ export function replaceContents(
   const { contents, range } = options;
 
   return [
-    sliceByteRange(file, 0, range.start),
+    sliceByteRange(file, 0, range.startByte),
     contents,
-    sliceByteRange(file, range.end),
+    sliceByteRange(file, range.endByte),
   ].join('');
 }
 

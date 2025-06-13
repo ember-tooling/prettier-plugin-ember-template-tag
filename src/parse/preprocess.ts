@@ -7,9 +7,10 @@ import {
 } from '../utils/content-tag.js';
 
 export interface Template {
+  contentRange: Range;
   contents: string;
   range: Range;
-  type: string;
+  type: 'class-member' | 'expression';
   utf16Range: {
     end: number;
     start: number;
@@ -38,7 +39,7 @@ export function preprocessTemplateRange(
     prefix = '{/*';
     suffix = '*/}';
 
-    const nextToken = sliceByteRange(code, template.range.end).match(/\S+/);
+    const nextToken = sliceByteRange(code, template.range.endByte).match(/\S+/);
 
     if (nextToken && (nextToken[0] === 'as' || nextToken[0] === 'satisfies')) {
       // Replace with parenthesized ObjectExpression
@@ -51,7 +52,7 @@ export function preprocessTemplateRange(
   // forward slash breaks the parsed templates.
   const contents = template.contents.replaceAll('/', PLACEHOLDER);
 
-  const templateLength = template.range.end - template.range.start;
+  const templateLength = template.range.endByte - template.range.startByte;
   const spaces =
     templateLength - getBuffer(contents).length - prefix.length - suffix.length;
 
@@ -69,8 +70,8 @@ export function codeToGlimmerAst(code: string, filename: string): Template[] {
     const { contentRange, contents, range, type } = contentTag;
 
     const utf16Range = {
-      end: sliceByteRange(code, 0, range.end).length,
-      start: sliceByteRange(code, 0, range.start).length,
+      end: sliceByteRange(code, 0, range.endByte).length,
+      start: sliceByteRange(code, 0, range.startByte).length,
     };
 
     return {
