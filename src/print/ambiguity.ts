@@ -2,7 +2,7 @@ import type { Node } from '@babel/types';
 import type { AstPath, doc, Printer } from 'prettier';
 import { printers as estreePrinters } from 'prettier/plugins/estree.js';
 
-import type { Options } from '../options.js';
+import type { PluginOptions } from '../options.js';
 import { flattenDoc } from '../utils/doc.js';
 
 const estreePrinter = estreePrinters['estree'] as Printer<Node | undefined>;
@@ -31,7 +31,7 @@ export function saveCurrentPrintOnSiblingNode(
 export function fixPreviousPrint(
   previousTemplatePrinted: doc.builders.Doc[],
   path: AstPath<Node | undefined>,
-  options: Options,
+  options: PluginOptions,
   print: (path: AstPath<Node | undefined>) => doc.builders.Doc,
   args: unknown,
 ): void {
