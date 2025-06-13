@@ -79,13 +79,13 @@
   "peerDependencies": {
     "prettier": ">= 3.0.0"
   },
-  "packageManager": "pnpm@8.13.1",
+  "packageManager": "pnpm@9.15.9",
   "engines": {
     "node": "18.* || >= 20"
   },
   "volta": {
     "node": "18.19.0",
-    "pnpm": "8.13.1"
+    "pnpm": "9.15.9"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
