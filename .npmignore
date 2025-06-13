@@ -3,11 +3,8 @@
 /examples/
 /src/
 /tests/
-/.eslintignore
-/.eslintrc.cjs
 /.gitignore
 /.prettierignore
-/.prettierrc.cjs
 /.release-it.json
 /.release-plan.json
 /CODE_OF_CONDUCT.md
@@ -15,9 +12,11 @@
 /RELEASE.md
 /ast-notes.md
 /design.md
+/eslint.config.mjs
 /index.html
 /pnpm-lock.yaml
 /pnpm-workspace.yaml
+/prettier.config.mjs
 /tsconfig.json
 /tsconfig.lint.json
 /vite.config.ts
