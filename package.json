@@ -30,7 +30,6 @@
   "main": "dist/src/main.js",
   "scripts": {
     "build": "./build.sh --production",
-    "example": "pnpm preexample && cd examples && pnpm example",
     "format": "prettier --cache --write .",
     "lint": "concurrently \"pnpm:lint:*(!fix)\" --names \"lint:\" --prefix-colors auto && pnpm lint:format",
     "lint:js": "eslint . --cache",
@@ -39,9 +38,8 @@
     "lint:format": "prettier --cache --check .",
     "lint:types": "tsc --noEmit",
     "prepack": "pnpm build",
-    "preexample": "vite build",
     "test": "concurrently \"pnpm:test:*\" --names \"test:\" --prefix-colors auto",
-    "test:example": "pnpm preexample && cd examples && pnpm test",
+    "test:fixtures": "./build.sh --test && mt dist-for-testing --quiet",
     "test:vitest": "vitest run --exclude dist-for-testing --exclude tests"
   },
   "dependencies": {
@@ -51,7 +49,10 @@
   "devDependencies": {
     "@babel/eslint-parser": "^7.27.5",
     "@babel/types": "^7.27.6",
+    "@codemod-utils/files": "^3.0.2",
+    "@codemod-utils/tests": "^2.0.1",
     "@eslint/js": "^9.28.0",
+    "@sondr3/minitest": "^0.1.2",
     "@tsconfig/node18": "^18.2.4",
     "@tsconfig/strictest": "^2.0.5",
     "@types/babel__core": "^7.20.5",
