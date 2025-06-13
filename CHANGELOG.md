@@ -1,5 +1,20 @@
 # Changelog
 
+## Release (2025-06-13)
+
+prettier-plugin-ember-template-tag 2.0.7 (patch)
+
+#### :house: Internal
+* `prettier-plugin-ember-template-tag`
+  * [#362](https://github.com/ember-tooling/prettier-plugin-ember-template-tag/pull/362) Updated dependencies ([@ijlee2](https://github.com/ijlee2))
+  * [#366](https://github.com/ember-tooling/prettier-plugin-ember-template-tag/pull/366) Refactor code (Part 2) ([@ijlee2](https://github.com/ijlee2))
+  * [#365](https://github.com/ember-tooling/prettier-plugin-ember-template-tag/pull/365) Update the non-linting dependencies ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+  * [#363](https://github.com/ember-tooling/prettier-plugin-ember-template-tag/pull/363) Refactored code ([@ijlee2](https://github.com/ijlee2))
+
+#### Committers: 2
+- Isaac Lee ([@ijlee2](https://github.com/ijlee2))
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
 ## Release (2025-06-05)
 
 prettier-plugin-ember-template-tag 2.0.6 (patch)
