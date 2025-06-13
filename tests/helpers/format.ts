@@ -1,13 +1,14 @@
 import type { Plugin } from 'prettier';
 import { format as prettierFormat } from 'prettier';
 
-import { PARSER_NAME } from '../../src/config.js';
-import plugin from '../../src/main.js';
-import type { Options } from '../../src/options.js';
+import { languages, options, parsers, printers } from '../../src/main.js';
+import type { PluginOptions } from '../../src/options.js';
 
-const DEFAULT_OPTIONS: Partial<Options> = {
-  parser: PARSER_NAME,
-  plugins: [plugin as Plugin],
+const plugin: Plugin = {
+  languages,
+  options,
+  parsers,
+  printers,
 };
 
 /**
@@ -18,10 +19,11 @@ const DEFAULT_OPTIONS: Partial<Options> = {
  */
 export async function format(
   code: string,
-  overrides: Partial<Options> = {},
+  overrides: Partial<PluginOptions> = {},
 ): Promise<string> {
   return await prettierFormat(code, {
-    ...DEFAULT_OPTIONS,
     ...overrides,
+    parser: 'ember-template-tag',
+    plugins: [plugin],
   });
 }

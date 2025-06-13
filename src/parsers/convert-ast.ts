@@ -2,19 +2,12 @@ import { traverse } from '@babel/core';
 import type {
   BlockStatement,
   File,
-  Node,
   ObjectExpression,
   StaticBlock,
 } from '@babel/types';
-import type { Parser } from 'prettier';
-import { parsers as babelParsers } from 'prettier/plugins/babel.js';
 
-import { PRINTER_NAME } from '../config.js';
-import type { Options } from '../options.js';
 import { assert } from '../utils/assert.js';
-import { preprocess, type Template } from './preprocess.js';
-
-const typescript = babelParsers['babel-ts'] as Parser<Node | undefined>;
+import type { Template } from './preprocess.js';
 
 /** Converts a node into a GlimmerTemplate node */
 function convertNode(
@@ -29,7 +22,7 @@ function convertNode(
 }
 
 /** Traverses the AST and replaces the transformed template parts with other AST */
-function convertAst(ast: File, templates: Template[]): void {
+export function convertAst(ast: File, templates: Template[]): void {
   traverse(ast, {
     enter(path) {
       const { node } = path;
@@ -89,18 +82,3 @@ function convertAst(ast: File, templates: Template[]): void {
     );
   }
 }
-
-export const parser: Parser<Node | undefined> = {
-  ...typescript,
-  astFormat: PRINTER_NAME,
-
-  async parse(code: string, options: Options): Promise<Node> {
-    const preprocessed = preprocess(code, options.filepath);
-
-    const ast = await typescript.parse(preprocessed.code, options);
-    assert('expected ast', ast);
-    convertAst(ast as File, preprocessed.templates);
-
-    return ast;
-  },
-};

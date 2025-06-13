@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import type { Options } from '../../src/options.js';
+import type { PluginOptions } from '../../src/options.js';
 import {
   AMBIGUOUS_PLACEHOLDER,
   getAmbiguousCases,
@@ -12,7 +12,7 @@ import { format } from './format.js';
 
 export interface Config {
   name: string;
-  options?: Partial<Options>;
+  options?: Partial<PluginOptions>;
 }
 
 /**

@@ -1,4 +1,4 @@
-/* eslint-disable jsdoc/require-jsdoc, unicorn/prefer-export-from */
+/* eslint-disable unicorn/prefer-export-from */
 import {
   type Parsed as ContentTag,
   Preprocessor,
