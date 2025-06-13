@@ -51,9 +51,9 @@ export function preprocessTemplateRange(
   // forward slash breaks the parsed templates.
   const contents = template.contents.replaceAll('/', PLACEHOLDER);
 
-  const tplLength = template.range.end - template.range.start;
+  const templateLength = template.range.end - template.range.start;
   const spaces =
-    tplLength - getBuffer(contents).length - prefix.length - suffix.length;
+    templateLength - getBuffer(contents).length - prefix.length - suffix.length;
 
   return replaceContents(code, {
     contents: [prefix, contents, ' '.repeat(spaces), suffix].join(''),
@@ -63,9 +63,9 @@ export function preprocessTemplateRange(
 
 /** Pre-processes the template info, parsing the template content to Glimmer AST. */
 export function codeToGlimmerAst(code: string, filename: string): Template[] {
-  const rawTemplates = parse(code, { filename });
+  const contentTags = parse(code, { filename });
 
-  const templates: Template[] = rawTemplates.map((r) => ({
+  const templates: Template[] = contentTags.map((r) => ({
     contentRange: r.contentRange,
     contents: r.contents,
     range: r.range,
