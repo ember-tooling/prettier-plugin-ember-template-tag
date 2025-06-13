@@ -40,11 +40,9 @@
     "lint:types": "tsc --noEmit",
     "prepack": "pnpm build",
     "preexample": "vite build",
-    "test": "vitest",
-    "test:all": "concurrently \"pnpm:test:run\" \"pnpm:test:example\" --prefix-colors auto",
+    "test": "concurrently \"pnpm:test:*\" --names \"test:\" --prefix-colors auto",
     "test:example": "pnpm preexample && cd examples && pnpm test",
-    "test:run": "vitest run",
-    "test:ui": "vitest --ui"
+    "test:vitest": "vitest run --exclude dist-for-testing --exclude tests"
   },
   "dependencies": {
     "@babel/core": "^7.27.4",
