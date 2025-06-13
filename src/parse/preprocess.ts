@@ -65,16 +65,22 @@ export function preprocessTemplateRange(
 export function codeToGlimmerAst(code: string, filename: string): Template[] {
   const contentTags = parse(code, { filename });
 
-  const templates: Template[] = contentTags.map((r) => ({
-    contentRange: r.contentRange,
-    contents: r.contents,
-    range: r.range,
-    type: r.type,
-    utf16Range: {
-      end: sliceByteRange(code, 0, r.range.end).length,
-      start: sliceByteRange(code, 0, r.range.start).length,
-    },
-  }));
+  const templates: Template[] = contentTags.map((contentTag) => {
+    const { contentRange, contents, range, type } = contentTag;
+
+    const utf16Range = {
+      end: sliceByteRange(code, 0, range.end).length,
+      start: sliceByteRange(code, 0, range.start).length,
+    };
+
+    return {
+      contentRange,
+      contents,
+      range,
+      type,
+      utf16Range,
+    };
+  });
 
   return templates;
 }
