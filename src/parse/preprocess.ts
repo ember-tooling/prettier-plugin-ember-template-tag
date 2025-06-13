@@ -2,6 +2,7 @@ import {
   getBuffer,
   parse,
   type Range,
+  replaceContents,
   sliceByteRange,
 } from '../utils/content-tag.js';
 
@@ -16,15 +17,6 @@ export interface Template {
 }
 
 const PLACEHOLDER = '~';
-
-function replaceRange(
-  s: string,
-  start: number,
-  end: number,
-  substitute: string,
-): string {
-  return sliceByteRange(s, 0, start) + substitute + sliceByteRange(s, end);
-}
 
 /**
  * Replace the template with a parsable placeholder that takes up the same
@@ -57,14 +49,16 @@ export function preprocessTemplateRange(
 
   // We need to replace forward slash with _something else_, because
   // forward slash breaks the parsed templates.
-  const content = template.contents.replaceAll('/', PLACEHOLDER);
+  const contents = template.contents.replaceAll('/', PLACEHOLDER);
 
   const tplLength = template.range.end - template.range.start;
   const spaces =
-    tplLength - getBuffer(content).length - prefix.length - suffix.length;
-  const total = prefix + content + ' '.repeat(spaces) + suffix;
+    tplLength - getBuffer(contents).length - prefix.length - suffix.length;
 
-  return replaceRange(code, template.range.start, template.range.end, total);
+  return replaceContents(code, {
+    contents: [prefix, contents, ' '.repeat(spaces), suffix].join(''),
+    range: template.range,
+  });
 }
 
 /** Pre-processes the template info, parsing the template content to Glimmer AST. */

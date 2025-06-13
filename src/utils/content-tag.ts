@@ -32,6 +32,22 @@ export function parse(
   return preprocessor.parse(file, options);
 }
 
+export function replaceContents(
+  file: string,
+  options: {
+    contents: string;
+    range: Range;
+  },
+): string {
+  const { contents, range } = options;
+
+  return [
+    sliceByteRange(file, 0, range.start),
+    contents,
+    sliceByteRange(file, range.end),
+  ].join('');
+}
+
 export function sliceByteRange(
   string_: string,
   indexStart: number,
