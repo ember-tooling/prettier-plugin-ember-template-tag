@@ -8,11 +8,11 @@ import {
 
 export interface Template {
   contents: string;
-  type: string;
   range: Range;
+  type: string;
   utf16Range: {
-    start: number;
     end: number;
+    start: number;
   };
 }
 
@@ -66,13 +66,13 @@ export function codeToGlimmerAst(code: string, filename: string): Template[] {
   const rawTemplates = parse(code, { filename });
 
   const templates: Template[] = rawTemplates.map((r) => ({
-    type: r.type,
-    range: r.range,
     contentRange: r.contentRange,
     contents: r.contents,
+    range: r.range,
+    type: r.type,
     utf16Range: {
-      start: sliceByteRange(code, 0, r.range.start).length,
       end: sliceByteRange(code, 0, r.range.end).length,
+      start: sliceByteRange(code, 0, r.range.start).length,
     },
   }));
 
@@ -97,5 +97,5 @@ export function preprocess(
     code = preprocessTemplateRange(template, code);
   }
 
-  return { templates, code };
+  return { code, templates };
 }
