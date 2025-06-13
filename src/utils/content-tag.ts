@@ -32,4 +32,14 @@ export function parse(
   return preprocessor.parse(file, options);
 }
 
+export function sliceByteRange(
+  string_: string,
+  indexStart: number,
+  indexEnd?: number,
+): string {
+  const buffer = getBuffer(string_);
+
+  return buffer.slice(indexStart, indexEnd).toString();
+}
+
 export type { ContentTag, Range };

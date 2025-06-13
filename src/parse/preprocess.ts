@@ -1,4 +1,9 @@
-import { getBuffer, parse, type Range } from '../utils/content-tag.js';
+import {
+  getBuffer,
+  parse,
+  type Range,
+  sliceByteRange,
+} from '../utils/content-tag.js';
 
 export interface Template {
   contents: string;
@@ -11,18 +16,6 @@ export interface Template {
 }
 
 const PLACEHOLDER = '~';
-
-/** Slice string using byte range */
-function sliceByteRange(s: string, a: number, b?: number): string {
-  const buf = getBuffer(s);
-  return buf.subarray(a, b).toString();
-}
-
-/** Converts byte index to js char index (utf16) */
-function byteToCharIndex(s: string, byteOffset: number): number {
-  const buf = getBuffer(s);
-  return buf.subarray(0, byteOffset).toString().length;
-}
 
 function replaceRange(
   s: string,
@@ -53,7 +46,7 @@ export function preprocessTemplateRange(
     prefix = '{/*';
     suffix = '*/}';
 
-    const nextToken = code.slice(template.range.end).toString().match(/\S+/);
+    const nextToken = sliceByteRange(code, template.range.end).match(/\S+/);
 
     if (nextToken && (nextToken[0] === 'as' || nextToken[0] === 'satisfies')) {
       // Replace with parenthesized ObjectExpression
@@ -84,8 +77,8 @@ export function codeToGlimmerAst(code: string, filename: string): Template[] {
     contentRange: r.contentRange,
     contents: r.contents,
     utf16Range: {
-      start: byteToCharIndex(code, r.range.start),
-      end: byteToCharIndex(code, r.range.end),
+      start: sliceByteRange(code, 0, r.range.start).length,
+      end: sliceByteRange(code, 0, r.range.end).length,
     },
   }));
 
