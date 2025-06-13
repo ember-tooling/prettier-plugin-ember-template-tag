@@ -54,11 +54,12 @@ export default tseslint.config(
   {
     ignores: [
       'dist/',
+      'dist-for-testing/',
       'node_modules/',
+      'tests-vitest/__snapshots__/',
+      'tests-vitest/cases/',
+      'tmp/',
       '.*/',
-      'tests/__snapshots__/',
-      'tests/cases/',
-      'vite.config.ts',
     ],
   },
   {

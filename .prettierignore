@@ -7,9 +7,9 @@
 pnpm-lock.yaml
 
 # specific to this package
-/examples/
-/tests/__snapshots__/
-/tests/cases/
+/tests/fixtures/
+/tests-vitest/__snapshots__/
+/tests-vitest/cases/
 CHANGELOG.md
 README.md
 RELEASE.md
