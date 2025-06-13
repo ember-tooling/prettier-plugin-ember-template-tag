@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/consistent-type-definitions, eslint-comments/disable-enable-pair, jsdoc/require-jsdoc, unicorn/prefer-export-from */
+/* eslint-disable jsdoc/require-jsdoc, unicorn/prefer-export-from */
 import {
   type Parsed as ContentTag,
   Preprocessor,

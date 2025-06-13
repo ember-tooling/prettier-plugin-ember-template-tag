@@ -34,7 +34,6 @@ function convertAst(ast: File, templates: Template[]): void {
     enter(path) {
       const { node } = path;
 
-      // eslint-disable-next-line @typescript-eslint/switch-exhaustiveness-check
       switch (node.type) {
         case 'BlockStatement':
         case 'ObjectExpression':

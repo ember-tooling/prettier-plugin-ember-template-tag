@@ -1,8 +1,9 @@
-#!/usr/bin/env node
+/* eslint-disable n/no-process-exit, unicorn/no-process-exit */
+import { spawn } from 'node:child_process';
+import fs from 'node:fs/promises';
+import path from 'node:path';
+
 import chalk from 'chalk';
-import { spawn } from 'child_process';
-import fs from 'fs/promises';
-import path from 'path';
 
 const debug = process.argv.includes('--debug');
 
@@ -14,21 +15,21 @@ const logDebug = (message) => {
 
 const newLine = () => console.log();
 
-const inputDir = './input';
-const expectedOutputDir = './expected-output';
+const inputDirectory = './input';
+const expectedOutputDirectory = './expected-output';
 
 // NOTE: Run with `--debug` to get debug output (from both this script and prettier)
 const run = async () => {
   logDebug('Reading input directory...');
 
   try {
-    const inputFiles = await fs.readdir(inputDir);
+    const inputFiles = await fs.readdir(inputDirectory);
     const originalFiles = new Map();
 
     logDebug('Backing up input files...');
     for (const file of inputFiles) {
-      const filePath = path.join(inputDir, file);
-      const fileContent = await fs.readFile(filePath, 'utf-8');
+      const filePath = path.join(inputDirectory, file);
+      const fileContent = await fs.readFile(filePath, 'utf8');
       originalFiles.set(file, fileContent);
     }
 
@@ -68,13 +69,13 @@ const run = async () => {
       let allFilesMatch = true;
 
       for (const file of inputFiles) {
-        const inputFilePath = path.join(inputDir, file);
-        const expectedOutputFilePath = path.join(expectedOutputDir, file);
+        const inputFilePath = path.join(inputDirectory, file);
+        const expectedOutputFilePath = path.join(expectedOutputDirectory, file);
 
         try {
           const [inputContent, expectedOutputContent] = await Promise.all([
-            fs.readFile(inputFilePath, 'utf-8'),
-            fs.readFile(expectedOutputFilePath, 'utf-8'),
+            fs.readFile(inputFilePath, 'utf8'),
+            fs.readFile(expectedOutputFilePath, 'utf8'),
           ]);
 
           if (inputContent === expectedOutputContent) {
@@ -91,8 +92,8 @@ const run = async () => {
             );
             allFilesMatch = false;
           }
-        } catch (err) {
-          console.error(chalk.red(`Error processing ${file}:`), err);
+        } catch (error) {
+          console.error(chalk.red(`Error processing ${file}:`), error);
           allFilesMatch = false;
         }
       }
@@ -107,8 +108,8 @@ const run = async () => {
         process.exit(1);
       }
     });
-  } catch (err) {
-    console.error(chalk.red('💩 Error:'), err);
+  } catch (error) {
+    console.error(chalk.red('💩 Error:'), error);
     process.exit(2);
   }
 };
