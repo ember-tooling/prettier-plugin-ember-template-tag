@@ -1,12 +1,9 @@
-import { Preprocessor } from 'content-tag';
+import { parse, type Range } from '../utils/content-tag.js';
 
 export interface Template {
   contents: string;
   type: string;
-  range: {
-    start: number;
-    end: number;
-  };
+  range: Range;
   utf16Range: {
     start: number;
     end: number;
@@ -93,11 +90,9 @@ export function preprocessTemplateRange(
   return replaceRange(code, template.range.start, template.range.end, total);
 }
 
-const p = new Preprocessor();
-
 /** Pre-processes the template info, parsing the template content to Glimmer AST. */
 export function codeToGlimmerAst(code: string, filename: string): Template[] {
-  const rawTemplates = p.parse(code, { filename });
+  const rawTemplates = parse(code, { filename });
 
   const templates: Template[] = rawTemplates.map((r) => ({
     type: r.type,
