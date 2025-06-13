@@ -4,9 +4,9 @@
     "declaration": false,
     "module": "nodenext",
     "moduleResolution": "nodenext",
-    "outDir": "dist-for-testing",
+    "outDir": "dist/src",
     "verbatimModuleSyntax": true
   },
-  "include": ["src", "tests", "types"],
+  "include": ["src", "types"],
   "exclude": []
 }

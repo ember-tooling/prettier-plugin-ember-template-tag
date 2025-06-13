@@ -27,9 +27,9 @@
     "email": "kmenne@gmail.com"
   },
   "type": "module",
-  "main": "dist/prettier-plugin-ember-template-tag.js",
+  "main": "dist/src/main.js",
   "scripts": {
-    "build": "tsc && vite build",
+    "build": "./build.sh --production",
     "example": "pnpm preexample && cd examples && pnpm example",
     "format": "prettier --cache --write .",
     "lint": "concurrently \"pnpm:lint:*(!fix)\" --names \"lint:\" --prefix-colors auto && pnpm lint:format",
@@ -37,7 +37,7 @@
     "lint:js:fix": "eslint . --fix",
     "lint:fix": "concurrently \"pnpm:lint:*:fix\" --names \"fix:\" --prefix-colors auto && pnpm format",
     "lint:format": "prettier --cache --check .",
-    "lint:types": "tsc --project tsconfig.lint.json",
+    "lint:types": "tsc --noEmit",
     "prepack": "pnpm build",
     "preexample": "vite build",
     "test": "vitest",
