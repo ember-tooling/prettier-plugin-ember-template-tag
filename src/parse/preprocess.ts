@@ -1,4 +1,4 @@
-import { parse, type Range } from '../utils/content-tag.js';
+import { getBuffer, parse, type Range } from '../utils/content-tag.js';
 
 export interface Template {
   contents: string;
@@ -10,18 +10,7 @@ export interface Template {
   };
 }
 
-const BufferMap: Map<string, Buffer> = new Map();
-
 const PLACEHOLDER = '~';
-
-function getBuffer(s: string): Buffer {
-  let buf = BufferMap.get(s);
-  if (!buf) {
-    buf = Buffer.from(s);
-    BufferMap.set(s, buf);
-  }
-  return buf;
-}
 
 /** Slice string using byte range */
 function sliceByteRange(s: string, a: number, b?: number): string {
@@ -33,11 +22,6 @@ function sliceByteRange(s: string, a: number, b?: number): string {
 function byteToCharIndex(s: string, byteOffset: number): number {
   const buf = getBuffer(s);
   return buf.subarray(0, byteOffset).toString().length;
-}
-
-/** Calculate byte length */
-function byteLength(s: string): number {
-  return getBuffer(s).length;
 }
 
 function replaceRange(
@@ -84,7 +68,7 @@ export function preprocessTemplateRange(
 
   const tplLength = template.range.end - template.range.start;
   const spaces =
-    tplLength - byteLength(content) - prefix.length - suffix.length;
+    tplLength - getBuffer(content).length - prefix.length - suffix.length;
   const total = prefix + content + ' '.repeat(spaces) + suffix;
 
   return replaceRange(code, template.range.start, template.range.end, total);
