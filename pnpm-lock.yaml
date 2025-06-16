@@ -23,7 +23,7 @@ importers:
         version: 7.27.6
       '@eslint/js':
         specifier: ^9.28.0
-        version: 9.28.0
+        version: 9.29.0
       '@tsconfig/node18':
         specifier: ^18.2.4
         version: 18.2.4
@@ -44,7 +44,7 @@ importers:
         version: 8.34.0(eslint@9.28.0)(typescript@5.8.3)
       '@vitest/eslint-plugin':
         specifier: ^1.2.4
-        version: 1.2.4(eslint@9.28.0)(typescript@5.8.3)(vitest@3.2.3(@types/debug@4.1.12)(@types/node@22.15.31)(@vitest/ui@3.2.3))
+        version: 1.2.4(eslint@9.28.0)(typescript@5.8.3)(vitest@3.2.3)
       '@vitest/ui':
         specifier: ^3.2.3
         version: 3.2.3(vitest@3.2.3)
@@ -386,6 +386,10 @@ packages:
 
   '@eslint/js@9.28.0':
     resolution: {integrity: sha512-fnqSjGWd/CoIp4EXIxWVK/sHA6DOHN4+8Ix2cX5ycOY7LG0UY8nHCU5pIp2eaE1Mc7Qd8kHspYNzYXT2ojPLzg==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@eslint/js@9.29.0':
+    resolution: {integrity: sha512-3PIF4cBw/y+1u2EazflInpV+lYsSG0aByVIQzAgb1m1MhHFSbqTyNqtBKHgWf/9Ykud+DhILS9EGkmekVhbKoQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
   '@eslint/object-schema@2.1.6':
@@ -2575,6 +2579,8 @@ snapshots:
 
   '@eslint/js@9.28.0': {}
 
+  '@eslint/js@9.29.0': {}
+
   '@eslint/object-schema@2.1.6': {}
 
   '@eslint/plugin-kit@0.2.8':
@@ -3004,7 +3010,7 @@ snapshots:
       '@typescript-eslint/types': 8.34.0
       eslint-visitor-keys: 4.2.0
 
-  '@vitest/eslint-plugin@1.2.4(eslint@9.28.0)(typescript@5.8.3)(vitest@3.2.3(@types/debug@4.1.12)(@types/node@22.15.31)(@vitest/ui@3.2.3))':
+  '@vitest/eslint-plugin@1.2.4(eslint@9.28.0)(typescript@5.8.3)(vitest@3.2.3)':
     dependencies:
       '@typescript-eslint/utils': 8.34.0(eslint@9.28.0)(typescript@5.8.3)
       eslint: 9.28.0
