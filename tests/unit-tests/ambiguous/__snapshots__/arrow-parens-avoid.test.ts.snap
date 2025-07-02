@@ -991,6 +991,17 @@ oops => {};
 "
 `;
 
+exports[`ambiguous > config > arrowParens: "avoid" > (oops) => {} > with semi, without newline > it formats ../cases/gjs/default-export.gjs 2`] = `
+"<template>
+  Explicit default export module top level component. Explicit default export
+  module top level component. Explicit default export module top level
+  component. Explicit default export module top level component. Explicit
+  default export module top level component.
+</template>
+oops => {};
+"
+`;
+
 exports[`ambiguous > config > arrowParens: "avoid" > (oops) => {} > with semi, without newline > it formats ../cases/gjs/exported-mod-var.gjs 1`] = `
 "export const Exported = <template>
   Exported variable template. Exported variable template. Exported variable

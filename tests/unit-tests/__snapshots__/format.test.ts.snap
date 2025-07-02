@@ -98,6 +98,23 @@ class MyComponent extends Component {
 "
 `;
 
+exports[`format > config > default > it formats ../cases/gjs/component-class-with-template-literal.gjs 2`] = `
+"import Component from "@glimmer/component";
+
+/** It's a component */
+class MyComponent extends Component {
+  <template>
+    <h1>
+      Class top level template. Class top level template. Class top level
+      template. Class top level template. Class top level template.
+    </h1>
+  </template>
+
+  what = \`template literal that is not a template\`;
+}
+"
+`;
+
 exports[`format > config > default > it formats ../cases/gjs/default-export.gjs 1`] = `
 "<template>
   Explicit default export module top level component. Explicit default export
@@ -567,6 +584,11 @@ export default class PooComponent extends Component {
     {{/if}}
   </template>
 }
+"
+`;
+
+exports[`format > config > default > it formats ../cases/gts/issue-374.gts 1`] = `
+"<template>…</template> satisfies unknown;
 "
 `;
 

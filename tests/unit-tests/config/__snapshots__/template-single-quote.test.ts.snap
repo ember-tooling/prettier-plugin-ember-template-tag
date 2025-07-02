@@ -30,6 +30,21 @@ class MyComponent extends Component {
 "
 `;
 
+exports[`config > singleQuote: false, templateSingleQuote: true > it formats quote-cases/component-class.gjs 2`] = `
+"import Component from "@glimmer/component";
+
+/** It's a component */
+class MyComponent extends Component {
+  <template>
+    <h1 class='i-have-quotes'>
+      Class top level template. Class top level template. Class top level
+      template. Class top level template. Class top level template.
+    </h1>
+  </template>
+}
+"
+`;
+
 exports[`config > singleQuote: true, templateSingleQuote should inherit > it formats quote-cases/component-class.gjs 1`] = `
 "import Component from '@glimmer/component';
 

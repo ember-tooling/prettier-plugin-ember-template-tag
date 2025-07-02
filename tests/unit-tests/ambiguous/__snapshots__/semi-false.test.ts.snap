@@ -4217,6 +4217,24 @@ class MyComponent extends Component {
 "
 `;
 
+exports[`ambiguous > config > semi: false > ["oops"] > with semi, with newline > it formats ../cases/gjs/component-class-with-content-before-template.gjs 2`] = `
+"import Component from "@glimmer/component"
+
+/** It's a component */
+class MyComponent extends Component {
+  get whatever() {}
+
+  <template>
+    <h1>
+      Class top level template. Class top level template. Class top level
+      template. Class top level template. Class top level template.
+    </h1>
+  </template>
+  ["oops"]
+}
+"
+`;
+
 exports[`ambiguous > config > semi: false > ["oops"] > with semi, with newline > it formats ../cases/gjs/default-export.gjs 1`] = `
 "<template>
   Explicit default export module top level component. Explicit default export
