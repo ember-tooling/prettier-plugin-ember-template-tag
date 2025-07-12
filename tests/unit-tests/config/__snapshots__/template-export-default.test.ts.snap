@@ -570,6 +570,21 @@ export default class PooComponent extends Component {
 "
 `;
 
+exports[`config > templateExportDefault: true > it formats ../cases/gts/issue-374.gts 1`] = `
+"import pageTitle from "ember-page-title/helpers/page-title";
+
+<template>
+  {{pageTitle "TestAppPrettierCharacter"}}
+
+  <h2 id="title">Welcome to Ember</h2>
+
+  {{outlet}}
+
+  …
+</template> satisfies unknown;
+"
+`;
+
 exports[`config > templateExportDefault: true > it formats ../cases/gts/js-only.gts 1`] = `
 "const num: number = 1;
 "
