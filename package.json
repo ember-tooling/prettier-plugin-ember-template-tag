@@ -27,7 +27,12 @@
     "email": "kmenne@gmail.com"
   },
   "type": "module",
-  "main": "dist/prettier-plugin-ember-template-tag.js",
+  "exports": {
+    ".": {
+      "import": "./dist/prettier-plugin-ember-template-tag.js",
+      "require": "./dist/prettier-plugin-ember-template-tag.cjs"
+    }
+  },
   "scripts": {
     "build": "tsc && vite build",
     "example": "pnpm preexample && cd examples && pnpm example",
