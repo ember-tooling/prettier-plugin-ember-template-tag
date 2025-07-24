@@ -38,20 +38,10 @@ export function replaceContents(
   const { contents, range } = options;
 
   return [
-    sliceByteRange(file, 0, range.startByte),
+    file.slice(0, range.startChar),
     contents,
-    sliceByteRange(file, range.endByte),
+    file.slice(range.endChar),
   ].join('');
-}
-
-export function sliceByteRange(
-  string_: string,
-  indexStart: number,
-  indexEnd?: number,
-): string {
-  const buffer = getBuffer(string_);
-
-  return buffer.slice(indexStart, indexEnd).toString();
 }
 
 export type { ContentTag, Range };
