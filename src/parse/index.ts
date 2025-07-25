@@ -12,7 +12,7 @@ import { parsers as babelParsers } from 'prettier/plugins/babel.js';
 import { PRINTER_NAME } from '../config.js';
 import type { Options } from '../options.js';
 import { assert } from '../utils/assert.js';
-import { preprocess, type Template } from './preprocess.js';
+import { codeToGlimmerAst, preprocess, type Template } from './preprocess.js';
 
 const typescript = babelParsers['babel-ts'] as Parser<Node | undefined>;
 
@@ -95,12 +95,13 @@ export const parser: Parser<Node | undefined> = {
   astFormat: PRINTER_NAME,
 
   async parse(code: string, options: Options): Promise<Node> {
-    const preprocessed = preprocess(code, options.filepath);
-
-    const ast = await typescript.parse(preprocessed.code, options);
+    const ast = await typescript.parse(code, options);
+    const templates = codeToGlimmerAst(code, options.filepath);
     assert('expected ast', ast);
-    convertAst(ast as File, preprocessed.templates);
+    convertAst(ast as File, templates);
 
     return ast;
   },
+
+  preprocess,
 };

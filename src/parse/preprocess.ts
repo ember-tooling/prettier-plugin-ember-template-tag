@@ -1,3 +1,4 @@
+import type { Options } from '../options.js';
 import {
   getBuffer,
   parse,
@@ -91,18 +92,12 @@ export function codeToGlimmerAst(code: string, filename: string): Template[] {
  * fixing the offsets and locations of all nodes also calculates the block
  * params locations & ranges and adding it to the info
  */
-export function preprocess(
-  code: string,
-  fileName: string,
-): {
-  code: string;
-  templates: Template[];
-} {
-  const templates = codeToGlimmerAst(code, fileName);
+export function preprocess(code: string, options: Options): string {
+  const templates = codeToGlimmerAst(code, options.filepath);
 
   for (const template of templates) {
     code = preprocessTemplateRange(template, code);
   }
 
-  return { code, templates };
+  return code;
 }
