@@ -9,11 +9,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "verbatimModuleSyntax": true,
-    "noEmit": true,
-
-    "paths": {
-      "*": ["./@types/*"]
-    }
+    "noEmit": true
   },
-  "include": ["src"]
+  "include": ["src", "types"]
 }
