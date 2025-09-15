@@ -80,7 +80,7 @@
     "release-plan": "^0.11.0",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.34.0",
-    "vite": "^6.3.5",
+    "vite": "^7.1.5",
     "vitest": "^3.2.3"
   },
   "peerDependencies": {
