@@ -46,10 +46,7 @@ export const printer: Printer<Node | undefined> = {
       } else {
         let printed = estreePrinter.print(path, options, print, args);
 
-        if (!Array.isArray(printed)) {
-          printed = [printed];
-        }
-
+        assert('Expected Glimmer doc to be an array', Array.isArray(printed));
         trimPrinted(printed);
 
         // Remove semicolons so we can manage them ourselves
@@ -113,6 +110,7 @@ export const printer: Printer<Node | undefined> = {
 
           const printed = printTemplateTag(content);
           saveCurrentPrintOnSiblingNode(path, printed);
+          console.log(printed);
           return printed;
         } catch (error) {
           console.error(error);
