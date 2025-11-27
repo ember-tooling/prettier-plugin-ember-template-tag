@@ -38,6 +38,11 @@ function convertAst(ast: File, templates: Template[]): void {
         case 'BlockStatement':
         case 'ObjectExpression':
         case 'StaticBlock': {
+          if (!node.range) {
+            // prettier 3.7.0 onwards removed `node.range`
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            node.range = [node.start!, node.end!];
+          }
           assert('expected range', node.range);
           const [start, end] = node.range;
 
