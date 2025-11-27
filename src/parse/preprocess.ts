@@ -32,12 +32,12 @@ export function preprocessTemplateRange(
 
   if (template.type === 'class-member') {
     // Replace with StaticBlock
-    prefix = 'static{/*';
-    suffix = '*/}';
+    prefix = 'static{t:`';
+    suffix = '`}';
   } else {
     // Replace with BlockStatement or ObjectExpression
-    prefix = '{/*';
-    suffix = '*/}';
+    prefix = '{t:`';
+    suffix = '`}';
 
     const nextToken = sliceByteRange(code, template.range.endByte).match(/\S+/);
 
