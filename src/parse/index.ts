@@ -38,6 +38,15 @@ function convertAst(ast: File, templates: Template[]): void {
         case 'BlockStatement':
         case 'ObjectExpression':
         case 'StaticBlock': {
+          if (
+            !node.range &&
+            typeof node.start === 'number' &&
+            typeof node.end === 'number'
+          ) {
+            // prettier 3.6.0 onwards doesn't have `node.range`
+            // as it was removed in babel
+            node.range = [node.start, node.end];
+          }
           assert('expected range', node.range);
           const [start, end] = node.range;
 
