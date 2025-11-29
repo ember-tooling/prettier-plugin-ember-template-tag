@@ -40,11 +40,11 @@ function findCorrectCommentBlockIndex(
   return comments.findIndex((comment) => {
     const { start: commentStart, end: commentEnd } = comment;
 
-    const check1 = (commentStart === start && commentEnd === end);
-    const check2 = (commentStart === start + 1 && commentEnd === end - 1);
-    const check3 = (commentStart === start + 7 && commentEnd === end - 1);
-
-    return check1 || check2 || check3;
+    return (
+      (commentStart === start && commentEnd === end) ||
+      (commentStart === start + 1 && commentEnd === end - 1) ||
+      (commentStart === start + 7 && commentEnd === end - 1)
+    );
   });
 
 }
