@@ -32,6 +32,10 @@ export const printer: Printer<Node | undefined> = {
     return estreePrinter.getVisitorKeys?.(node, nonTraversableKeys) || [];
   },
 
+  printPrettierIgnored(path: AstPath<Node | undefined>, options: Options) {
+    return printRawText(path, options);
+  },
+
   print(
     path: AstPath<Node | undefined>,
     options: Options,
@@ -154,7 +158,15 @@ function printRawText(
 }
 
 function hasPrettierIgnore(path: AstPath<Node | undefined>): boolean {
-  return path.node?.leadingComments?.at(-1)?.value.trim() === 'prettier-ignore';
+  let possibleComment = path.node?.leadingComments?.at(-1)?.value.trim();
+
+  // @ts-expect-error Comments exist on node sometimes
+  if (!path.node?.leadingComments && path.node?.comments) {
+    // @ts-expect-error Comments exist on node sometimes
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+    possibleComment = path.node.comments?.at(-1)?.value.trim();
+  }
+  return possibleComment === 'prettier-ignore';
 }
 
 function checkPrettierIgnore(path: AstPath<Node | undefined>): boolean {
