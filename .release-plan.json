@@ -1,21 +1,17 @@
 {
   "solution": {
     "prettier-plugin-ember-template-tag": {
-      "impact": "minor",
-      "oldVersion": "2.0.6",
-      "newVersion": "2.1.0",
+      "impact": "patch",
+      "oldVersion": "2.1.0",
+      "newVersion": "2.1.1",
       "constraints": [
         {
-          "impact": "minor",
-          "reason": "Appears in changelog section :rocket: Enhancement"
-        },
-        {
           "impact": "patch",
-          "reason": "Appears in changelog section :house: Internal"
+          "reason": "Appears in changelog section :bug: Bug Fix"
         }
       ],
       "pkgJSONPath": "./package.json"
     }
   },
-  "description": "## Release (2025-07-23)\n\nprettier-plugin-ember-template-tag 2.1.0 (minor)\n\n#### :rocket: Enhancement\n* `prettier-plugin-ember-template-tag`\n  * [#382](https://github.com/ember-tooling/prettier-plugin-ember-template-tag/pull/382) build: publish cjs + esm ([@geneukum](https://github.com/geneukum))\n\n#### :house: Internal\n* `prettier-plugin-ember-template-tag`\n  * [#362](https://github.com/ember-tooling/prettier-plugin-ember-template-tag/pull/362) Updated dependencies ([@ijlee2](https://github.com/ijlee2))\n  * [#366](https://github.com/ember-tooling/prettier-plugin-ember-template-tag/pull/366) Refactor code (Part 2) ([@ijlee2](https://github.com/ijlee2))\n  * [#365](https://github.com/ember-tooling/prettier-plugin-ember-template-tag/pull/365) Update the non-linting dependencies ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n  * [#363](https://github.com/ember-tooling/prettier-plugin-ember-template-tag/pull/363) Refactored code ([@ijlee2](https://github.com/ijlee2))\n\n#### Committers: 3\n- Geordan Neukum ([@geneukum](https://github.com/geneukum))\n- Isaac Lee ([@ijlee2](https://github.com/ijlee2))\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n"
+  "description": "## Release (2025-11-29)\n\nprettier-plugin-ember-template-tag 2.1.1 (patch)\n\n#### :bug: Bug Fix\n* `prettier-plugin-ember-template-tag`\n  * [#408](https://github.com/ember-tooling/prettier-plugin-ember-template-tag/pull/408) Fix problems with prettier v3.6.0+ ([@evoactivity](https://github.com/evoactivity))\n\n#### Committers: 1\n- Liam Potter ([@evoactivity](https://github.com/evoactivity))\n"
 }

@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2025-11-29)
+
+prettier-plugin-ember-template-tag 2.1.1 (patch)
+
+#### :bug: Bug Fix
+* `prettier-plugin-ember-template-tag`
+  * [#408](https://github.com/ember-tooling/prettier-plugin-ember-template-tag/pull/408) Fix problems with prettier v3.6.0+ ([@evoactivity](https://github.com/evoactivity))
+
+#### Committers: 1
+- Liam Potter ([@evoactivity](https://github.com/evoactivity))
+
 ## Release (2025-07-23)
 
 prettier-plugin-ember-template-tag 2.1.0 (minor)
