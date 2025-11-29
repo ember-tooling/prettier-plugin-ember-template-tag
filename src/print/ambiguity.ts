@@ -41,6 +41,7 @@ export function fixPreviousPrint(
     print,
     args,
   );
+  console.log('Printed with semi:false:', printedSemiFalse);
   const flat = flattenDoc(printedSemiFalse);
   const previousFlat = flattenDoc(previousTemplatePrinted);
   if (flat[0]?.startsWith(';') && previousFlat.at(-1) !== ';') {

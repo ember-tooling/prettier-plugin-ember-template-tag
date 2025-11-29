@@ -6,7 +6,8 @@ module('Render with template tag', function (hooks) {
 	setupRenderingTest(hooks);
 
 	  test('it has a template tag', async function (assert) {
-			await render(<template>
+			await render(
+        <template>
               what
             </template>);
 			assert.dom().hasText('what');
@@ -14,9 +15,11 @@ module('Render with template tag', function (hooks) {
 
 
 	test('it has a template tag with a tag', async function (assert) {
-			await render(<template>
-              <h1>what</h1>
-            </template>);
+			await render(
+        <template>
+          <h1>what</h1>
+        </template>
+      );
 			assert.dom().hasText('what');
   });
 

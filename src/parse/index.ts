@@ -3,8 +3,8 @@ import type {
   BlockStatement,
   File,
   Node,
-  ObjectExpression,
   StaticBlock,
+  TaggedTemplateExpression,
 } from '@babel/types';
 import type { Parser } from 'prettier';
 import { parsers as babelParsers } from 'prettier/plugins/babel.js';
@@ -18,7 +18,7 @@ const typescript = babelParsers['babel-ts'] as Parser<Node | undefined>;
 
 /** Converts a node into a GlimmerTemplate node */
 function convertNode(
-  node: BlockStatement | ObjectExpression | StaticBlock,
+  node: BlockStatement | TaggedTemplateExpression | StaticBlock,
   rawTemplate: Template,
 ): void {
   node.innerComments = [];
@@ -36,17 +36,8 @@ function convertAst(ast: File, templates: Template[]): void {
 
       switch (node.type) {
         case 'BlockStatement':
-        case 'ObjectExpression':
-        case 'StaticBlock': {
-          if (
-            !node.range &&
-            typeof node.start === 'number' &&
-            typeof node.end === 'number'
-          ) {
-            // prettier 3.6.0 onwards doesn't have `node.range`
-            // as it was removed in babel
-            node.range = [node.start, node.end];
-          }
+        case 'StaticBlock':
+        case 'TaggedTemplateExpression': {
           assert('expected range', node.range);
           const [start, end] = node.range;
 
@@ -57,11 +48,7 @@ function convertAst(ast: File, templates: Template[]): void {
               return true;
             }
 
-            return (
-              node.type === 'ObjectExpression' &&
-              utf16Range.start === start - 1 &&
-              utf16Range.end === end + 1
-            );
+            return false;
           });
 
           if (templateIndex === -1) {
@@ -74,14 +61,6 @@ function convertAst(ast: File, templates: Template[]): void {
             throw new Error(
               'expected raw template because splice index came from findIndex',
             );
-          }
-
-          const index =
-            node.innerComments?.[0] &&
-            ast.comments?.indexOf(node.innerComments[0]);
-
-          if (ast.comments && index !== undefined && index >= 0) {
-            ast.comments.splice(index, 1);
           }
 
           convertNode(node, rawTemplate);

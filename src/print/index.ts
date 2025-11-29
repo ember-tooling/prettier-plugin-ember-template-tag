@@ -108,9 +108,10 @@ export const printer: Printer<Node | undefined> = {
             embedOptions as Options,
           );
 
+
           const printed = printTemplateTag(content);
+
           saveCurrentPrintOnSiblingNode(path, printed);
-          console.log(printed);
           return printed;
         } catch (error) {
           console.error(error);

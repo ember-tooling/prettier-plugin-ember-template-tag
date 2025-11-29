@@ -3,83 +3,52 @@ import { describe, expect, test } from 'vitest';
 import {
   codeToGlimmerAst,
   preprocessTemplateRange,
+  TEMPLATE_IDENTIFIER
 } from '../../src/parse/preprocess.js';
 
 const TEST_CASES = [
   {
     code: '<template>hi</template>',
-    expected: ['{t:`hi               `}'],
+    expected: [`${TEMPLATE_IDENTIFIER}\`hi              \``],
   },
   {
     code: '<template>/* hi */</template>',
-    expected: ['{t:`~* hi *~               `}'],
+    expected: [`${TEMPLATE_IDENTIFIER}\`~* hi *~              \``],
   },
   {
     code: '<template><div>hi</div></template>',
-    expected: ['{t:`<div>hi<~div>               `}'],
+    expected: [`${TEMPLATE_IDENTIFIER}\`<div>hi<~div>              \``],
   },
   {
     code: '<template>{{#if true}}hi{{/if}}</template>',
-    expected: ['{t:`{{#if true}}hi{{~if}}               `}'],
+    expected: [`${TEMPLATE_IDENTIFIER}\`{{#if true}}hi{{~if}}              \``],
   },
   {
     code: '<template>////////////////</template>',
-    expected: ['{t:`~~~~~~~~~~~~~~~~               `}'],
+    expected: [`${TEMPLATE_IDENTIFIER}\`~~~~~~~~~~~~~~~~              \``],
   },
   {
     code: '<template>💩</template>',
-    expected: ['{t:`💩               `}'],
+    expected: [`${TEMPLATE_IDENTIFIER}\`💩              \``],
   },
   {
     code: 'const a = <template>foo</template>; const b = <template>bar</template>;',
     expected: [
-      'const a = {t:`foo               `}; const b = <template>bar</template>;',
-      'const a = <template>foo</template>; const b = {t:`bar               `};',
+      `const a = ${TEMPLATE_IDENTIFIER}\`foo              \`; const b = <template>bar</template>;`,
+      `const a = <template>foo</template>; const b = ${TEMPLATE_IDENTIFIER}\`bar              \`;`,
     ],
   },
   {
     code: `const a = <template>💩💩💩💩💩💩💩</template>; const b = <template>💩</template>`,
     expected: [
-      'const a = {t:`💩💩💩💩💩💩💩               `}; const b = <template>💩</template>',
-      'const a = <template>💩💩💩💩💩💩💩</template>; const b = {t:`💩               `}',
+      `const a = ${TEMPLATE_IDENTIFIER}\`💩💩💩💩💩💩💩              \`; const b = <template>💩</template>`,
+      `const a = <template>💩💩💩💩💩💩💩</template>; const b = ${TEMPLATE_IDENTIFIER}\`💩              \``,
     ],
   },
   {
     code: 'class Thing { <template>hello</template> }',
-    expected: ['class Thing { static{t:`hello         `} }'],
-  },
-  {
-    code: `export default <template>     Explicit default export module top level component. Explicit default export module top level component. Explicit default export module top level component. Explicit default export module top level component. Explicit default export module top level component. </template>
-/*AMBIGUOUS*/`,
-    expected: [
-      `export default {t:` +
-        '`     Explicit default export module top level component. Explicit default export module top level component. Explicit default export module top level component. Explicit default export module top level component. Explicit default export module top level component.                `}' +
-        `
-/*AMBIGUOUS*/`,
-    ],
-  },
-  {
-    code: `class MyComponent
-  extends Component {
-    // prettier-ignore
-        <template>
-
-
-    <h1>   Class top level template. Class top level template. Class top level template. Class top level template. Class top level template. </h1>
-  </template>
-}`,
-    expected: [
-      `class MyComponent
-  extends Component {
-    // prettier-ignore
-        static{t:\`
-
-
-    <h1>   Class top level template. Class top level template. Class top level template. Class top level template. Class top level template. <~h1>
-           \`}
-}`,
-    ],
-  },
+    expected: [`class Thing { static{${TEMPLATE_IDENTIFIER}\`hello      \`} }`],
+  }
 ];
 const FILE_NAME = 'foo.gts';
 

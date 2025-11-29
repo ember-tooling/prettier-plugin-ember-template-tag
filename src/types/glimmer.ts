@@ -3,8 +3,8 @@ import type {
   ExportDefaultDeclaration,
   ExpressionStatement,
   Node,
-  ObjectExpression,
   StaticBlock,
+  TaggedTemplateExpression,
   TSAsExpression,
 } from '@babel/types';
 
@@ -12,7 +12,7 @@ import type { ContentTag } from '../utils/content-tag.js';
 
 type GlimmerTemplateProperties = (
   | BlockStatement
-  | ObjectExpression
+  | TaggedTemplateExpression
   | StaticBlock
 ) & {
   /**
@@ -34,7 +34,7 @@ type GlimmerTemplateProperties = (
   };
 };
 
-type GlimmerTemplate = (BlockStatement | ObjectExpression | StaticBlock) &
+type GlimmerTemplate = (BlockStatement | TaggedTemplateExpression | StaticBlock) &
   GlimmerTemplateProperties;
 
 /** Returns true if the node is a GlimmerTemplate. */
@@ -56,16 +56,19 @@ export function isGlimmerTemplateParent(
 ): node is GlimmerTemplateParent {
   if (!node) return false;
 
-  return (
+  const check = (
     isGlimmerStatementTS(node) ||
     isGlimmerExportDefaultDeclaration(node) ||
     isGlimmerExportDefaultDeclarationTS(node)
   );
+
+
+  return check;
 }
 
 type GlimmerStatementTS = ExpressionStatement & {
   expression: TSAsExpression & {
-    expression: ObjectExpression & GlimmerTemplateProperties;
+    expression: TaggedTemplateExpression & GlimmerTemplateProperties;
   };
 };
 
@@ -77,16 +80,19 @@ type GlimmerStatementTS = ExpressionStatement & {
  * ```
  */
 function isGlimmerStatementTS(node: Node): node is GlimmerStatementTS {
-  return (
+  const check = (
     node.type === 'ExpressionStatement' &&
     node.expression.type === 'TSAsExpression' &&
-    node.expression.expression.type === 'ObjectExpression' &&
+    node.expression.expression.type === 'TaggedTemplateExpression' &&
     isGlimmerTemplate(node.expression.expression)
   );
+
+
+  return check;
 }
 
 type GlimmerExportDefaultDeclaration = ExportDefaultDeclaration & {
-  declaration: ObjectExpression & GlimmerTemplateProperties;
+  declaration: TaggedTemplateExpression & GlimmerTemplateProperties;
 };
 
 /**
@@ -101,14 +107,14 @@ function isGlimmerExportDefaultDeclaration(
 ): node is GlimmerExportDefaultDeclaration {
   return (
     node.type === 'ExportDefaultDeclaration' &&
-    node.declaration.type === 'ObjectExpression' &&
+    node.declaration.type === 'TaggedTemplateExpression' &&
     isGlimmerTemplate(node.declaration)
   );
 }
 
 type GlimmerExportDefaultDeclarationTS = ExportDefaultDeclaration & {
   declaration: TSAsExpression & {
-    expression: ObjectExpression & GlimmerTemplateProperties;
+    expression: TaggedTemplateExpression & GlimmerTemplateProperties;
   };
 };
 
@@ -125,7 +131,7 @@ function isGlimmerExportDefaultDeclarationTS(
   return (
     node.type === 'ExportDefaultDeclaration' &&
     node.declaration.type === 'TSAsExpression' &&
-    node.declaration.expression.type === 'ObjectExpression' &&
+    node.declaration.expression.type === 'TaggedTemplateExpression' &&
     isGlimmerTemplate(node.declaration.expression)
   );
 }

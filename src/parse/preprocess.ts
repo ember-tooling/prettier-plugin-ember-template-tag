@@ -17,6 +17,8 @@ export interface Template {
   };
 }
 
+export const TEMPLATE_IDENTIFIER = '__p_x';
+
 const PLACEHOLDER = '~';
 
 /**
@@ -32,20 +34,20 @@ export function preprocessTemplateRange(
 
   if (template.type === 'class-member') {
     // Replace with StaticBlock
-    prefix = 'static{t:`';
+    prefix = `static{${TEMPLATE_IDENTIFIER}\``;
     suffix = '`}';
   } else {
-    // Replace with BlockStatement or ObjectExpression
-    prefix = '{t:`';
-    suffix = '`}';
+    // Replace with a TaggedTemplateExpression
+    prefix = `${TEMPLATE_IDENTIFIER}\``;
+    suffix = '`';
 
-    const nextToken = sliceByteRange(code, template.range.endByte).match(/\S+/);
+    // const nextToken = sliceByteRange(code, template.range.endByte).match(/\S+/);
 
-    if (nextToken && (nextToken[0] === 'as' || nextToken[0] === 'satisfies')) {
-      // Replace with parenthesized ObjectExpression
-      prefix = '(' + prefix;
-      suffix = suffix + ')';
-    }
+    // if (nextToken && (nextToken[0] === 'as' || nextToken[0] === 'satisfies')) {
+    //   // Replace with parenthesized TaggedTemplateExpression
+    //   prefix = `({${TEMPLATE_IDENTIFIER}:\`` + prefix;
+    //   suffix = suffix + '})';
+    // }
   }
 
   // We need to replace forward slash with _something else_, because
@@ -54,7 +56,8 @@ export function preprocessTemplateRange(
 
   const templateLength = template.range.endByte - template.range.startByte;
   const spaces =
-    templateLength - getBuffer(contents).length - prefix.length - suffix.length;
+    Math.max(templateLength - getBuffer(contents).length - prefix.length - suffix.length, 0);
+
 
   return replaceContents(code, {
     contents: [prefix, contents, ' '.repeat(spaces), suffix].join(''),
