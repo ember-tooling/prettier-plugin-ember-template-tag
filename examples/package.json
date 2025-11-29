@@ -8,7 +8,7 @@
     "test": "node ./bin/test.mjs"
   },
   "dependencies": {
-    "prettier": "^3.5.3",
+    "prettier": "^3.7.3",
     "prettier-plugin-ember-template-tag": "workspace:^"
   },
   "devDependencies": {
