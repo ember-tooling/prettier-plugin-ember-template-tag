@@ -28,27 +28,42 @@ function convertNode(
   });
 }
 
+function findCorrectCommentBlockIndex(
+  comments: File['comments'],
+  start: number,
+  end: number,
+): number {
+  if (!comments) {
+    return -1;
+  }
+
+  return comments.findIndex((comment) => {
+    const { start: commentStart, end: commentEnd } = comment;
+
+    const check1 = (commentStart === start && commentEnd === end);
+    const check2 = (commentStart === start + 1 && commentEnd === end - 1);
+    const check3 = (commentStart === start + 7 && commentEnd === end - 1);
+
+    return check1 || check2 || check3;
+  });
+
+}
+
 /** Traverses the AST and replaces the transformed template parts with other AST */
 function convertAst(ast: File, templates: Template[]): void {
   traverse(ast, {
     enter(path) {
+      if (templates.length === 0) {
+        return null;
+      }
+
       const { node } = path;
 
       switch (node.type) {
         case 'BlockStatement':
         case 'ObjectExpression':
         case 'StaticBlock': {
-          if (
-            !node.range &&
-            typeof node.start === 'number' &&
-            typeof node.end === 'number'
-          ) {
-            // prettier 3.6.0 onwards doesn't have `node.range`
-            // as it was removed in babel
-            node.range = [node.start, node.end];
-          }
-          assert('expected range', node.range);
-          const [start, end] = node.range;
+          const [start, end] = [typescript.locStart(node), typescript.locEnd(node)];
 
           const templateIndex = templates.findIndex((template) => {
             const { utf16Range } = template;
@@ -76,12 +91,16 @@ function convertAst(ast: File, templates: Template[]): void {
             );
           }
 
-          const index =
-            node.innerComments?.[0] &&
-            ast.comments?.indexOf(node.innerComments[0]);
+          if (ast.comments && ast.comments.length > 0) {
+            const commentBlockIndex = findCorrectCommentBlockIndex(
+              ast.comments,
+              start,
+              end,
+            );
 
-          if (ast.comments && index !== undefined && index >= 0) {
-            ast.comments.splice(index, 1);
+            if (commentBlockIndex !== undefined && commentBlockIndex >= 0) {
+              ast.comments.splice(commentBlockIndex, 1);
+            }
           }
 
           convertNode(node, rawTemplate);
