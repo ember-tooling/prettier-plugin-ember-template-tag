@@ -46,7 +46,6 @@ function findCorrectCommentBlockIndex(
       (commentStart === start + 7 && commentEnd === end - 1)
     );
   });
-
 }
 
 /** Traverses the AST and replaces the transformed template parts with other AST */
@@ -63,7 +62,10 @@ function convertAst(ast: File, templates: Template[]): void {
         case 'BlockStatement':
         case 'ObjectExpression':
         case 'StaticBlock': {
-          const [start, end] = [typescript.locStart(node), typescript.locEnd(node)];
+          const [start, end] = [
+            typescript.locStart(node),
+            typescript.locEnd(node),
+          ];
 
           const templateIndex = templates.findIndex((template) => {
             const { utf16Range } = template;

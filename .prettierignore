@@ -1,6 +1,6 @@
 # compiled output
 /dist/
- 
+
 # misc
 !.*
 .*/
@@ -13,3 +13,4 @@ pnpm-lock.yaml
 CHANGELOG.md
 README.md
 RELEASE.md
+CONTRIBUTING.md
