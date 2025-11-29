@@ -32,6 +32,10 @@ export const printer: Printer<Node | undefined> = {
     return estreePrinter.getVisitorKeys?.(node, nonTraversableKeys) || [];
   },
 
+  printPrettierIgnored(path: AstPath<Node | undefined>, options: Options) {
+    return printRawText(path, options);
+  },
+
   print(
     path: AstPath<Node | undefined>,
     options: Options,

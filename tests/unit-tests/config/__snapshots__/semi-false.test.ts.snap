@@ -871,7 +871,7 @@ export interface Signature {
 }
 
 // prettier-ignore
-;<template>
+<template>
               what
             </template> as TemplateOnlyComponent<Signature>
 "
