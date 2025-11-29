@@ -38,16 +38,9 @@ function convertAst(ast: File, templates: Template[]): void {
         case 'BlockStatement':
         case 'StaticBlock':
         case 'TaggedTemplateExpression': {
-
-          if (
-            !node.range
-          ) {
-            // prettier 3.6.0 onwards doesn't have `node.range`
-            node.range = [typescript.locStart(node), typescript.locEnd(node)];
-          }
-
-          assert('expected range', node.range);
-          const [start, end] = node.range;
+          const range = [typescript.locStart(node), typescript.locEnd(node)];
+          assert('expected range', typeof range[0] === 'number' && typeof range[1] === 'number');
+          const [start, end] = range;
 
           const templateIndex = templates.findIndex((template) => {
             const { utf16Range } = template;
