@@ -8,40 +8,40 @@ import {
 const TEST_CASES = [
   {
     code: '<template>hi</template>',
-    expected: [`{/*hi               */}`],
+    expected: [`{/*                 */}`],
   },
   {
     code: '<template>/* hi */</template>',
-    expected: [`{/*~* hi *~               */}`],
+    expected: [`{/*                       */}`],
   },
   {
     code: '<template><div>hi</div></template>',
-    expected: [`{/*<div>hi<~div>               */}`],
+    expected: [`{/*                            */}`],
   },
   {
     code: '<template>{{#if true}}hi{{/if}}</template>',
-    expected: [`{/*{{#if true}}hi{{~if}}               */}`],
+    expected: [`{/*                                    */}`],
   },
   {
-    code: '<template>////////////////</template>',
-    expected: [`{/*~~~~~~~~~~~~~~~~               */}`],
+    code: '<template>////////\n////////</template>',
+    expected: [`{/*               \n                */}`],
   },
   {
     code: '<template>💩</template>',
-    expected: [`{/*💩               */}`],
+    expected: [`{/*                 */}`],
   },
   {
     code: 'const a = <template>foo</template>; const b = <template>bar</template>;',
     expected: [
-      `const a = {/*foo               */}; const b = <template>bar</template>;`,
-      `const a = <template>foo</template>; const b = {/*bar               */};`,
+      `const a = {/*                  */}; const b = <template>bar</template>;`,
+      `const a = <template>foo</template>; const b = {/*                  */};`,
     ],
   },
   {
     code: `const a = <template>💩💩💩💩💩💩💩</template>; const b = <template>💩</template>`,
     expected: [
-      `const a = {/*💩💩💩💩💩💩💩               */}; const b = <template>💩</template>`,
-      `const a = <template>💩💩💩💩💩💩💩</template>; const b = {/*💩               */}`,
+      `const a = {/*                             */}; const b = <template>💩</template>`,
+      `const a = <template>💩💩💩💩💩💩💩</template>; const b = {/*                 */}`,
     ],
   },
 ];
