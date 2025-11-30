@@ -1,0 +1,28 @@
+name: Nightly Prettier Latest
+
+on:
+  schedule:
+    - cron: '0 2 * * *'  # Runs at 02:00 UTC daily
+  workflow_dispatch:  # Allows manual trigger
+
+jobs:
+  test-prettier-latest:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: 'pnpm'
+
+      - run: pnpm add -D prettier@latest -w
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm test
