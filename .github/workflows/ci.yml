@@ -7,12 +7,31 @@ on:
     branches: [main]
 
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'pnpm'
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm lint
+
   test:
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: ['20', '22', '24']
+        node-version: ['18', '20', '22', '24']
 
     steps:
       - uses: actions/checkout@v4
@@ -27,8 +46,6 @@ jobs:
           cache: 'pnpm'
 
       - run: pnpm install --frozen-lockfile
-
-      - run: pnpm lint
 
       - run: pnpm build
 
