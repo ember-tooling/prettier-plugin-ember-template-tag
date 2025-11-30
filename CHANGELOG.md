@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2025-11-30)
+
+prettier-plugin-ember-template-tag 2.1.2 (patch)
+
+#### :bug: Bug Fix
+* `prettier-plugin-ember-template-tag`
+  * [#412](https://github.com/ember-tooling/prettier-plugin-ember-template-tag/pull/412) Improve preprocess ([@fisker](https://github.com/fisker))
+
+#### Committers: 1
+- fisker Cheung ([@fisker](https://github.com/fisker))
+
 ## Release (2025-11-29)
 
 prettier-plugin-ember-template-tag 2.1.1 (patch)
