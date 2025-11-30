@@ -1,8 +1,6 @@
 import {
-  getBuffer,
   parse,
   type Range,
-  replaceContents,
   sliceByteRange,
 } from '../utils/content-tag.js';
 
@@ -17,8 +15,6 @@ export interface Template {
   };
 }
 
-const PLACEHOLDER = '~';
-
 /**
  * Replace the template with a parsable placeholder that takes up the same
  * range.
@@ -27,6 +23,9 @@ export function preprocessTemplateRange(
   template: Template,
   code: string,
 ): string {
+  const { start, end } = template.utf16Range;
+  const after = code.slice(end);
+
   let prefix: string;
   let suffix: string;
 
@@ -39,7 +38,7 @@ export function preprocessTemplateRange(
     prefix = '{/*';
     suffix = '*/}';
 
-    const nextToken = sliceByteRange(code, template.range.endByte).match(/\S+/);
+    const nextToken = after.match(/\S+/);
 
     if (nextToken && (nextToken[0] === 'as' || nextToken[0] === 'satisfies')) {
       // Replace with parenthesized ObjectExpression
@@ -48,18 +47,14 @@ export function preprocessTemplateRange(
     }
   }
 
-  // We need to replace forward slash with _something else_, because
-  // forward slash breaks the parsed templates.
-  const contents = template.contents.replaceAll('/', PLACEHOLDER);
+  const before = code.slice(0, start);
+  const spaces = code
+    .slice(start + prefix.length, end - suffix.length)
+    // Replace everything except `\n` with space, so the line and column remain correct
+    // Prettier normalized EOL to `\n`, so we don't need worry about `\r` and `\r\n`
+    .replaceAll(/[^\n]/g, ' ');
 
-  const templateLength = template.range.endByte - template.range.startByte;
-  const spaces =
-    templateLength - getBuffer(contents).length - prefix.length - suffix.length;
-
-  return replaceContents(code, {
-    contents: [prefix, contents, ' '.repeat(spaces), suffix].join(''),
-    range: template.range,
-  });
+  return before + prefix + spaces + suffix + after;
 }
 
 /** Pre-processes the template info, parsing the template content to Glimmer AST. */
