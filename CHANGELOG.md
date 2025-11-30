@@ -2,6 +2,18 @@
 
 ## Release (2025-11-30)
 
+* prettier-plugin-ember-template-tag 2.1.3 (patch)
+
+#### :house: Internal
+* `prettier-plugin-ember-template-tag`
+  * [#416](https://github.com/ember-tooling/prettier-plugin-ember-template-tag/pull/416) Add matrix to test different versions of prettier ([@evoactivity](https://github.com/evoactivity))
+  * [#414](https://github.com/ember-tooling/prettier-plugin-ember-template-tag/pull/414) Updates dependencies ([@evoactivity](https://github.com/evoactivity))
+
+#### Committers: 1
+- Liam Potter ([@evoactivity](https://github.com/evoactivity))
+
+## Release (2025-11-30)
+
 prettier-plugin-ember-template-tag 2.1.2 (patch)
 
 #### :bug: Bug Fix
