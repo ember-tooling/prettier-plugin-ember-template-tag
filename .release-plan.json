@@ -2,8 +2,8 @@
   "solution": {
     "prettier-plugin-ember-template-tag": {
       "impact": "patch",
-      "oldVersion": "2.1.0",
-      "newVersion": "2.1.1",
+      "oldVersion": "2.1.1",
+      "newVersion": "2.1.2",
       "constraints": [
         {
           "impact": "patch",
@@ -13,5 +13,5 @@
       "pkgJSONPath": "./package.json"
     }
   },
-  "description": "## Release (2025-11-29)\n\nprettier-plugin-ember-template-tag 2.1.1 (patch)\n\n#### :bug: Bug Fix\n* `prettier-plugin-ember-template-tag`\n  * [#408](https://github.com/ember-tooling/prettier-plugin-ember-template-tag/pull/408) Fix problems with prettier v3.6.0+ ([@evoactivity](https://github.com/evoactivity))\n\n#### Committers: 1\n- Liam Potter ([@evoactivity](https://github.com/evoactivity))\n"
+  "description": "## Release (2025-11-30)\n\nprettier-plugin-ember-template-tag 2.1.2 (patch)\n\n#### :bug: Bug Fix\n* `prettier-plugin-ember-template-tag`\n  * [#412](https://github.com/ember-tooling/prettier-plugin-ember-template-tag/pull/412) Improve preprocess ([@fisker](https://github.com/fisker))\n\n#### Committers: 1\n- fisker Cheung ([@fisker](https://github.com/fisker))\n"
 }
