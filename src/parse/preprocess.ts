@@ -1,8 +1,4 @@
-import {
-  parse,
-  type Range,
-  sliceByteRange,
-} from '../utils/content-tag.js';
+import { parse, type Range, sliceByteRange } from '../utils/content-tag.js';
 
 export interface Template {
   contentRange: Range;
