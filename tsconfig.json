@@ -1,7 +1,7 @@
 {
   "extends": [
     "@tsconfig/strictest/tsconfig.json",
-    "@tsconfig/node18/tsconfig.json"
+    "@tsconfig/node24/tsconfig.json"
   ],
   "compilerOptions": {
     "useDefineForClassFields": true,

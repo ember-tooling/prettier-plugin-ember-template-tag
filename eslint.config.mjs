@@ -1,6 +1,7 @@
 import babelEslintParser from '@babel/eslint-parser';
 import eslint from '@eslint/js';
 import eslintPluginVitest from '@vitest/eslint-plugin';
+import { defineConfig } from 'eslint/config';
 import eslintConfigPrettier from 'eslint-config-prettier';
 import eslintPluginJsdoc from 'eslint-plugin-jsdoc';
 import eslintPluginN from 'eslint-plugin-n';
@@ -51,7 +52,7 @@ const customRules = {
   },
 };
 
-export default tseslint.config(
+export default defineConfig(
   {
     ignores: [
       'dist/',
