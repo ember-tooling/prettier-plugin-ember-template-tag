@@ -2,8 +2,8 @@ name: Nightly Prettier Latest
 
 on:
   schedule:
-    - cron: '0 2 * * *'  # Runs at 02:00 UTC daily
-  workflow_dispatch:  # Allows manual trigger
+    - cron: '0 2 * * *'
+  workflow_dispatch:
 
 jobs:
   test-prettier-latest:
@@ -26,3 +26,43 @@ jobs:
       - run: pnpm install --frozen-lockfile
 
       - run: pnpm test
+
+      - name: Create or comment on issue
+        if: failure()
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const issueTitle = 'Nightly Prettier Latest Test Failed';
+
+            // Search for existing open issue
+            const issues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: ['automated', 'test-failure']
+            });
+
+            const existingIssue = issues.data.find(issue => issue.title === issueTitle);
+
+            const body = `Test failed on run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+            **Commit:** ${{ github.sha }}
+            **Date:** ${new Date().toISOString()}`;
+
+            if (existingIssue) {
+              // Add comment to existing issue
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: existingIssue.number,
+                body: body
+              });
+            } else {
+              // Create new issue
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: issueTitle,
+                body: body,
+                labels: ['automated', 'test-failure']
+              });
+            }
