@@ -1,6 +1,6 @@
 import type { File } from '@babel/types';
 import type { Parser, ParserOptions } from 'prettier';
-import { parsers as prettierParsers } from 'prettier/plugins/babel.js';
+import { parsers as prettierParsers } from 'prettier/plugins/babel';
 
 import { convertAst, preprocess } from './parsers/index.js';
 import { assert } from './utils/assert.js';

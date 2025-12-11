@@ -1,5 +1,5 @@
 import type { AstPath, doc as AST, Printer } from 'prettier';
-import { printers as prettierPrinters } from 'prettier/plugins/estree.js';
+import { printers as prettierPrinters } from 'prettier/plugins/estree';
 
 import type { PluginOptions } from '../options.js';
 import { flattenDoc } from '../utils/doc.js';
