@@ -9,9 +9,9 @@ import type {
 import type { Parser } from 'prettier';
 import { parsers as babelParsers } from 'prettier/plugins/babel.js';
 
-import { PRINTER_NAME } from '../config.js';
 import type { Options } from '../options.js';
 import { assert } from '../utils/assert.js';
+import { PRINTER_NAME } from '../utils/index.js';
 import { preprocess, type Template } from './preprocess.js';
 
 const typescript = babelParsers['babel-ts'] as Parser<Node | undefined>;
