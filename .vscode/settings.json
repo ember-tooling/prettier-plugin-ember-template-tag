@@ -1,5 +1,4 @@
 {
-  "explorer.excludeGitIgnore": true,
   "npm.packageManager": "pnpm",
 
   "editor.formatOnSave": true,
