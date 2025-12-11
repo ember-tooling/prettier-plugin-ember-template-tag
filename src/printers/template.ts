@@ -2,7 +2,6 @@ import type { Options as PrettierOptions } from 'prettier';
 import { doc } from 'prettier';
 
 import type { PluginOptions } from '../options.js';
-import { getTemplateSingleQuote } from '../options.js';
 import { flattenDoc } from '../utils/doc.js';
 import { TEMPLATE_TAG_CLOSE, TEMPLATE_TAG_OPEN } from '../utils/index.js';
 
@@ -30,7 +29,7 @@ export async function printTemplateContent(
   return await textToDoc(text.trim(), {
     ...options,
     parser: 'glimmer',
-    singleQuote: getTemplateSingleQuote(options),
+    singleQuote: options.templateSingleQuote ?? options.singleQuote,
   });
 }
 
