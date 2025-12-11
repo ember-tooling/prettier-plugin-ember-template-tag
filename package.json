@@ -48,7 +48,7 @@
     "test:ui": "vitest --ui"
   },
   "dependencies": {
-    "@babel/core": "^7.28.5",
+    "@babel/traverse": "^7.28.5",
     "content-tag": "^4.0.0"
   },
   "devDependencies": {
@@ -58,6 +58,7 @@
     "@tsconfig/node24": "^24.0.3",
     "@tsconfig/strictest": "^2.0.8",
     "@types/babel__core": "^7.20.5",
+    "@types/babel__traverse": "^7.28.0",
     "@types/node": "^24.10.1",
     "@typescript-eslint/eslint-plugin": "^8.48.0",
     "@typescript-eslint/parser": "^8.48.0",

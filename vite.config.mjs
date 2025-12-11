@@ -8,7 +8,7 @@ export default defineConfig({
         'prettier',
         'prettier/plugins/estree.js',
         'prettier/plugins/babel.js',
-        '@babel/core',
+        '@babel/traverse',
       ],
     },
     lib: {

@@ -1,4 +1,4 @@
-import { traverse } from '@babel/core';
+import traverse from '@babel/traverse';
 import type {
   BlockStatement,
   File,
