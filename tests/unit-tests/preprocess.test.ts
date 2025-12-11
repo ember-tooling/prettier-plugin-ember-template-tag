@@ -3,7 +3,7 @@ import { describe, expect, test } from 'vitest';
 import {
   codeToGlimmerAst,
   preprocessTemplateRange,
-} from '../../src/parse/preprocess.js';
+} from '../../src/parsers/preprocess.js';
 
 const TEST_CASES = [
   {
