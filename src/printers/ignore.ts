@@ -2,18 +2,7 @@ import type { AstPath } from 'prettier';
 
 import type { NodeType } from '../utils/index.js';
 
-export function checkPrettierIgnore(path: AstPath<NodeType>): boolean {
-  if (hasPrettierIgnore(path)) {
-    return true;
-  }
-
-  return (
-    Boolean(path.getParentNode()) &&
-    path.callParent((parent) => checkPrettierIgnore(parent))
-  );
-}
-
-export function hasPrettierIgnore(path: AstPath<NodeType>): boolean {
+function hasPrettierIgnore(path: AstPath<NodeType>): boolean {
   let possibleComment = path.node?.leadingComments?.at(-1)?.value.trim();
 
   // @ts-expect-error Comments exist on node sometimes
@@ -24,4 +13,15 @@ export function hasPrettierIgnore(path: AstPath<NodeType>): boolean {
   }
 
   return possibleComment === 'prettier-ignore';
+}
+
+export function checkPrettierIgnore(path: AstPath<NodeType>): boolean {
+  if (hasPrettierIgnore(path)) {
+    return true;
+  }
+
+  return (
+    Boolean(path.getParentNode()) &&
+    path.callParent((parent) => checkPrettierIgnore(parent))
+  );
 }

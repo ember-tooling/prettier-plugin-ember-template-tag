@@ -1,2 +1,2 @@
-export * from './convert-ast.js';
-export * from './preprocess.js';
+export { convertAst } from './convert-ast.js';
+export { preprocess } from './preprocess.js';

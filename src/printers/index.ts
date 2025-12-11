@@ -1,3 +1,12 @@
-export * from './ambiguity.js';
-export * from './ignore.js';
-export * from './print.js';
+export {
+  fixPreviousPrint,
+  saveCurrentPrintOnSiblingNode,
+} from './ambiguity.js';
+export { checkPrettierIgnore } from './ignore.js';
+export {
+  docMatchesString,
+  printRawText,
+  printTemplateContent,
+  printTemplateTag,
+  trimPrinted,
+} from './print.js';
