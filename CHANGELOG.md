@@ -1,5 +1,21 @@
 # Changelog
 
+## Release (2025-12-11)
+
+* prettier-plugin-ember-template-tag 2.1.3 (patch)
+
+#### :bug: Bug Fix
+* `prettier-plugin-ember-template-tag`
+  * [#418](https://github.com/ember-tooling/prettier-plugin-ember-template-tag/pull/418) Mark dependencies as external and revert to outputting CJS only ([@evoactivity](https://github.com/evoactivity))
+
+#### :house: Internal
+* `prettier-plugin-ember-template-tag`
+  * [#416](https://github.com/ember-tooling/prettier-plugin-ember-template-tag/pull/416) Add matrix to test different versions of prettier ([@evoactivity](https://github.com/evoactivity))
+  * [#414](https://github.com/ember-tooling/prettier-plugin-ember-template-tag/pull/414) Updates dependencies ([@evoactivity](https://github.com/evoactivity))
+
+#### Committers: 1
+- Liam Potter ([@evoactivity](https://github.com/evoactivity))
+
 ## Release (2025-11-30)
 
 prettier-plugin-ember-template-tag 2.1.2 (patch)
