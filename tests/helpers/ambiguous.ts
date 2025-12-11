@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import type { Options } from '../../src/options.js';
+import type { PluginOptions } from '../../src/options.js';
 import { parse } from '../../src/utils/content-tag.js';
 import type { TestCase } from '../helpers/cases.js';
 import { getAllCases } from '../helpers/cases.js';
@@ -89,7 +89,7 @@ export function makeAmbiguousExpressionTest(
 
 async function behavesLikeFormattedAmbiguousCase(
   code: string,
-  formatOptions: Partial<Options> = {},
+  formatOptions: Partial<PluginOptions> = {},
 ): Promise<void> {
   try {
     const result = await format(code, formatOptions);

@@ -1,7 +1,7 @@
 import type { Options as PrettierOptions } from 'prettier';
 import { doc } from 'prettier';
 
-import type { Options } from '../options.js';
+import type { PluginOptions } from '../options.js';
 import { getTemplateSingleQuote } from '../options.js';
 import { flattenDoc } from '../utils/doc.js';
 import { TEMPLATE_TAG_CLOSE, TEMPLATE_TAG_OPEN } from '../utils/index.js';
@@ -25,7 +25,7 @@ export async function printTemplateContent(
     // should normalize them into standard Prettier options at this point.
     options: PrettierOptions,
   ) => Promise<doc.builders.Doc>,
-  options: Options,
+  options: PluginOptions,
 ): Promise<doc.builders.Doc> {
   return await textToDoc(text.trim(), {
     ...options,

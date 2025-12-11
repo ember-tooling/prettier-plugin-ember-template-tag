@@ -9,7 +9,7 @@ import type {
 import type { Parser } from 'prettier';
 import { parsers as babelParsers } from 'prettier/plugins/babel.js';
 
-import type { Options } from '../options.js';
+import type { PluginOptions } from '../options.js';
 import { assert } from '../utils/assert.js';
 import { PRINTER_NAME } from '../utils/index.js';
 import { preprocess, type Template } from './preprocess.js';
@@ -124,7 +124,7 @@ export const parser: Parser<Node | undefined> = {
   ...typescript,
   astFormat: PRINTER_NAME,
 
-  async parse(code: string, options: Options): Promise<Node> {
+  async parse(code: string, options: PluginOptions): Promise<Node> {
     const preprocessed = preprocess(code, options.filepath);
 
     const ast = await typescript.parse(preprocessed.code, options);

@@ -7,7 +7,7 @@ import type {
 } from 'prettier';
 import { printers as estreePrinters } from 'prettier/plugins/estree.js';
 
-import type { Options } from '../options.js';
+import type { PluginOptions } from '../options.js';
 import {
   isGlimmerTemplate,
   isGlimmerTemplateParent,
@@ -32,13 +32,16 @@ export const printer: Printer<Node | undefined> = {
     return estreePrinter.getVisitorKeys?.(node, nonTraversableKeys) || [];
   },
 
-  printPrettierIgnored(path: AstPath<Node | undefined>, options: Options) {
+  printPrettierIgnored(
+    path: AstPath<Node | undefined>,
+    options: PluginOptions,
+  ) {
     return printRawText(path, options);
   },
 
   print(
     path: AstPath<Node | undefined>,
-    options: Options,
+    options: PluginOptions,
     print: (path: AstPath<Node | undefined>) => doc.builders.Doc,
     args: unknown,
   ) {
@@ -102,14 +105,14 @@ export const printer: Printer<Node | undefined> = {
     return async (textToDoc) => {
       if (node && isGlimmerTemplate(node)) {
         if (checkPrettierIgnore(path)) {
-          return printRawText(path, embedOptions as Options);
+          return printRawText(path, embedOptions as PluginOptions);
         }
 
         try {
           const content = await printTemplateContent(
             node.extra.template.contents,
             textToDoc,
-            embedOptions as Options,
+            embedOptions as PluginOptions,
           );
 
           const printed = printTemplateTag(content);
@@ -117,7 +120,7 @@ export const printer: Printer<Node | undefined> = {
           return printed;
         } catch (error) {
           console.error(error);
-          const printed = [printRawText(path, embedOptions as Options)];
+          const printed = [printRawText(path, embedOptions as PluginOptions)];
           saveCurrentPrintOnSiblingNode(path, printed);
           return printed;
         }
@@ -142,7 +145,7 @@ function trimPrinted(printed: doc.builders.Doc[]): void {
 
 function printRawText(
   { node }: AstPath<Node | undefined>,
-  options: Options,
+  options: PluginOptions,
 ): string {
   if (!node) {
     return '';
