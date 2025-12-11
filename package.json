@@ -26,12 +26,8 @@
     "name": "Krystan HuffMenne",
     "email": "kmenne@gmail.com"
   },
-  "type": "module",
   "exports": {
-    ".": {
-      "import": "./dist/prettier-plugin-ember-template-tag.js",
-      "require": "./dist/prettier-plugin-ember-template-tag.cjs"
-    }
+    ".": "./dist/prettier-plugin-ember-template-tag.js"
   },
   "scripts": {
     "build": "tsc && vite build",
