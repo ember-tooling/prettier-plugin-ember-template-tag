@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2025-12-12)
+
+* prettier-plugin-ember-template-tag 2.1.4 (patch)
+
+#### :house: Internal
+* `prettier-plugin-ember-template-tag`
+  * [#367](https://github.com/ember-tooling/prettier-plugin-ember-template-tag/pull/367) Refactored code (Part 3) ([@ijlee2](https://github.com/ijlee2))
+
+#### Committers: 1
+- Isaac Lee ([@ijlee2](https://github.com/ijlee2))
+
 ## Release (2025-12-11)
 
 * prettier-plugin-ember-template-tag 2.1.3 (patch)
