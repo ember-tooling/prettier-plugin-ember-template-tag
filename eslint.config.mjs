@@ -28,7 +28,6 @@ const customRules = {
   rules: {
     'jsdoc/check-param-names': 'off',
     'jsdoc/newline-after-description': 'off',
-    'jsdoc/require-jsdoc': ['error', { publicOnly: true }],
     'jsdoc/require-param': 'off',
     'jsdoc/require-param-type': 'off',
     'jsdoc/require-returns': 'off',

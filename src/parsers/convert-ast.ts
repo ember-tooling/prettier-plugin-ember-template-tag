@@ -2,19 +2,18 @@ import traverse from '@babel/traverse';
 import type {
   BlockStatement,
   File,
-  Node,
   ObjectExpression,
   StaticBlock,
 } from '@babel/types';
 import type { Parser } from 'prettier';
-import { parsers as babelParsers } from 'prettier/plugins/babel.js';
 
-import { PRINTER_NAME } from '../config.js';
-import type { Options } from '../options.js';
-import { assert } from '../utils/assert.js';
-import { preprocess, type Template } from './preprocess.js';
+import type { NodeType } from '../utils/index.js';
+import type { Template } from './preprocess.js';
 
-const typescript = babelParsers['babel-ts'] as Parser<Node | undefined>;
+type Data = {
+  parser: Parser<NodeType>;
+  templates: Template[];
+};
 
 /** Converts a node into a GlimmerTemplate node */
 function convertNode(
@@ -49,7 +48,9 @@ function findCorrectCommentBlockIndex(
 }
 
 /** Traverses the AST and replaces the transformed template parts with other AST */
-function convertAst(ast: File, templates: Template[]): void {
+export function convertAst(ast: File, data: Data): void {
+  const { parser, templates } = data;
+
   traverse(ast, {
     enter(path) {
       if (templates.length === 0) {
@@ -62,10 +63,7 @@ function convertAst(ast: File, templates: Template[]): void {
         case 'BlockStatement':
         case 'ObjectExpression':
         case 'StaticBlock': {
-          const [start, end] = [
-            typescript.locStart(node),
-            typescript.locEnd(node),
-          ];
+          const [start, end] = [parser.locStart(node), parser.locEnd(node)];
 
           const templateIndex = templates.findIndex((template) => {
             const { utf16Range } = template;
@@ -119,18 +117,3 @@ function convertAst(ast: File, templates: Template[]): void {
     );
   }
 }
-
-export const parser: Parser<Node | undefined> = {
-  ...typescript,
-  astFormat: PRINTER_NAME,
-
-  async parse(code: string, options: Options): Promise<Node> {
-    const preprocessed = preprocess(code, options.filepath);
-
-    const ast = await typescript.parse(preprocessed.code, options);
-    assert('expected ast', ast);
-    convertAst(ast as File, preprocessed.templates);
-
-    return ast;
-  },
-};
