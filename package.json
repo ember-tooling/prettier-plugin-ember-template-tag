@@ -14,9 +14,6 @@
   "bugs": {
     "url": "https://github.com/ember-tooling/prettier-plugin-ember-template-tag/issues"
   },
-  "files": [
-    "dist"
-  ],
   "repository": {
     "type": "git",
     "url": "git@github.com:ember-tooling/prettier-plugin-ember-template-tag.git"
@@ -29,18 +26,21 @@
   "exports": {
     ".": "./dist/prettier-plugin-ember-template-tag.js"
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc && vite build",
+    "preexample": "vite build",
     "example": "pnpm preexample && cd examples && pnpm example",
     "format": "prettier --cache --write .",
     "lint": "concurrently \"pnpm:lint:*(!fix)\" --names \"lint:\" --prefix-colors auto && pnpm lint:format",
-    "lint:js": "eslint . --cache",
-    "lint:js:fix": "eslint . --fix",
     "lint:fix": "concurrently \"pnpm:lint:*:fix\" --names \"fix:\" --prefix-colors auto && pnpm format",
     "lint:format": "prettier --cache --check .",
+    "lint:js": "eslint . --cache",
+    "lint:js:fix": "eslint . --fix",
     "lint:types": "tsc --project tsconfig.lint.json",
     "prepack": "pnpm build",
-    "preexample": "vite build",
     "test": "vitest",
     "test:all": "concurrently \"pnpm:test:run\" \"pnpm:test:example\" --prefix-colors auto",
     "test:example": "pnpm preexample && cd examples && pnpm test",
@@ -74,7 +74,7 @@
     "globals": "^16.5.0",
     "prettier": "^3.7.3",
     "prettier-plugin-jsdoc": "^1.7.0",
-    "release-plan": "^0.17.2",
+    "release-plan": "^0.17.4",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.48.0",
     "vite": "^7.2.4",
