@@ -6,8 +6,8 @@ export default defineConfig({
       external: [
         'content-tag',
         'prettier',
-        'prettier/plugins/estree.js',
-        'prettier/plugins/babel.js',
+        'prettier/plugins/estree',
+        'prettier/plugins/babel',
       ],
     },
     lib: {
