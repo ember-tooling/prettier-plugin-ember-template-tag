@@ -295,6 +295,14 @@ const three = <template>{{if true "true"}}</template>;
 "
 `;
 
+exports[`config > templateExportDefault: true > it formats ../cases/gts/comment-with-template.gts 1`] = `
+"// A comment before template
+<template>
+  <div>hello</div>
+</template>
+"
+`;
+
 exports[`config > templateExportDefault: true > it formats ../cases/gts/complex.gts 1`] = `
 "import { on } from "@ember/modifier";
 import { service } from "@ember/service";
