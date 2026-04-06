@@ -1,5 +1,21 @@
 # Changelog
 
+## Release (2026-04-01)
+
+* prettier-plugin-ember-template-tag 2.1.4 (patch)
+
+#### :bug: Bug Fix
+* `prettier-plugin-ember-template-tag`
+  * [#425](https://github.com/ember-tooling/prettier-plugin-ember-template-tag/pull/425) fix: externalize prettier/plugins/estree to prevent comment formatting crash ([@lifeart](https://github.com/lifeart))
+
+#### :house: Internal
+* `prettier-plugin-ember-template-tag`
+  * [#367](https://github.com/ember-tooling/prettier-plugin-ember-template-tag/pull/367) Refactored code (Part 3) ([@ijlee2](https://github.com/ijlee2))
+
+#### Committers: 2
+- Alex Kanunnikov ([@lifeart](https://github.com/lifeart))
+- Isaac Lee ([@ijlee2](https://github.com/ijlee2))
+
 ## Release (2025-12-11)
 
 * prettier-plugin-ember-template-tag 2.1.3 (patch)
