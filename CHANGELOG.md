@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2026-04-17)
+
+* prettier-plugin-ember-template-tag 2.1.5 (patch)
+
+#### :bug: Bug Fix
+* `prettier-plugin-ember-template-tag`
+  * [#422](https://github.com/ember-tooling/prettier-plugin-ember-template-tag/pull/422) Fix `templateExportDefault: true` not adding `export default` to bare module-level templates ([@Copilot](https://github.com/apps/copilot-swe-agent))
+
+#### Committers: 1
+- Copilot [Bot] ([@copilot-swe-agent](https://github.com/apps/copilot-swe-agent))
+
 ## Release (2026-04-01)
 
 * prettier-plugin-ember-template-tag 2.1.4 (patch)
