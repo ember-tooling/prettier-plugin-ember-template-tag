@@ -40,6 +40,11 @@ function embed(path: AstPath<NodeType>, options: PluginOptions<NodeType>) {
         );
 
         const printed = printTemplateTag(content);
+
+        if (options.templateExportDefault && path.parent?.type === 'Program') {
+          printed.unshift('export ', 'default ');
+        }
+
         saveCurrentPrintOnSiblingNode(path, printed);
         return printed;
       } catch (error) {

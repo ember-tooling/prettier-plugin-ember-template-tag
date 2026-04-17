@@ -170,7 +170,7 @@ exports[`config > templateExportDefault: true > it formats ../cases/gjs/one-line
 
 exports[`config > templateExportDefault: true > it formats ../cases/gjs/preceded-by-object.gjs 1`] = `
 "const foo = {};
-<template>hello</template>
+export default <template>hello</template>
 "
 `;
 
@@ -276,12 +276,12 @@ export default Route(
 `;
 
 exports[`config > templateExportDefault: true > it formats ../cases/gjs/simple.gjs 1`] = `
-"<template>what</template>
+"export default <template>what</template>
 "
 `;
 
 exports[`config > templateExportDefault: true > it formats ../cases/gjs/simple-with-tag.gjs 1`] = `
-"<template>
+"export default <template>
   <h1>what</h1>
 </template>
 
@@ -483,7 +483,7 @@ export default class PooComponent extends Component {
 `;
 
 exports[`config > templateExportDefault: true > it formats ../cases/gts/issue-191-b.gts 1`] = `
-"<template>💩</template>
+"export default <template>💩</template>
 "
 `;
 
