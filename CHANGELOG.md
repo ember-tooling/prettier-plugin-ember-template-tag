@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2026-04-21)
+
+* prettier-plugin-ember-template-tag 2.1.6 (patch)
+
+#### :house: Internal
+* `prettier-plugin-ember-template-tag`
+  * [#436](https://github.com/ember-tooling/prettier-plugin-ember-template-tag/pull/436) fix: update snapshot to reflect export default in comment-with-template case ([@evoactivity](https://github.com/evoactivity))
+
+#### Committers: 1
+- Liam ([@evoactivity](https://github.com/evoactivity))
+
 ## Release (2026-04-17)
 
 * prettier-plugin-ember-template-tag 2.1.5 (patch)
