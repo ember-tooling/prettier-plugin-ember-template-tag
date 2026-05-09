@@ -48,12 +48,12 @@
     "test:ui": "vitest --ui"
   },
   "dependencies": {
-    "@babel/traverse": "^7.28.5",
-    "content-tag": "^4.0.0"
+    "@babel/traverse": "^7.29.0",
+    "content-tag": "^4.2.0"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.28.5",
-    "@babel/types": "^7.28.5",
+    "@babel/types": "^7.29.0",
     "@eslint/js": "^9.39.1",
     "@tsconfig/node24": "^24.0.3",
     "@tsconfig/strictest": "^2.0.8",
@@ -72,7 +72,7 @@
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "eslint-plugin-unicorn": "^62.0.0",
     "globals": "^16.5.0",
-    "prettier": "^3.7.3",
+    "prettier": "^3.8.3",
     "prettier-plugin-jsdoc": "^1.7.0",
     "release-plan": "^0.17.4",
     "typescript": "^5.9.3",
