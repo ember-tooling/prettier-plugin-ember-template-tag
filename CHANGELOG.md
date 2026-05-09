@@ -1,5 +1,18 @@
 # Changelog
 
+## Release (2026-05-09)
+
+* prettier-plugin-ember-template-tag 2.1.6 (patch)
+
+#### :house: Internal
+* `prettier-plugin-ember-template-tag`
+  * [#447](https://github.com/ember-tooling/prettier-plugin-ember-template-tag/pull/447) Updated content-tag to 4.2.0 and @babel/traverse to 7.29.0 ([@ijlee2](https://github.com/ijlee2))
+  * [#436](https://github.com/ember-tooling/prettier-plugin-ember-template-tag/pull/436) fix: update snapshot to reflect export default in comment-with-template case ([@evoactivity](https://github.com/evoactivity))
+
+#### Committers: 2
+- Isaac Lee ([@ijlee2](https://github.com/ijlee2))
+- Liam ([@evoactivity](https://github.com/evoactivity))
+
 ## Release (2026-04-17)
 
 * prettier-plugin-ember-template-tag 2.1.5 (patch)
