@@ -14,7 +14,11 @@ import {
 } from './printers/index.js';
 import { isGlimmerTemplate, isGlimmerTemplateParent } from './types/glimmer.js';
 import { assert } from './utils/assert.js';
-import { type NodeType, type PrettierPrint, PRINTER_NAME } from './utils/index.js';
+import {
+  type NodeType,
+  type PrettierPrint,
+  PRINTER_NAME,
+} from './utils/index.js';
 
 const printer = prettierPrinters['estree'] as Printer<NodeType>;
 
