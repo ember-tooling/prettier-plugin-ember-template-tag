@@ -76,11 +76,11 @@ importers:
         specifier: ^16.5.0
         version: 16.5.0
       prettier:
-        specifier: ^3.8.3
-        version: 3.8.3
+        specifier: ^3.9.3
+        version: 3.9.3
       prettier-plugin-jsdoc:
         specifier: ^1.7.0
-        version: 1.7.0(prettier@3.8.3)
+        version: 1.7.0(prettier@3.9.3)
       release-plan:
         specifier: ^0.17.4
         version: 0.17.4
@@ -2042,6 +2042,11 @@ packages:
 
   prettier@3.8.3:
     resolution: {integrity: sha512-7igPTM53cGHMW8xWuVTydi2KO233VFiTNyF5hLJqpilHfmn8C8gPf+PS7dUT64YcXFbiMGZxS9pCSxL/Dxm/Jw==}
+    engines: {node: '>=14'}
+    hasBin: true
+
+  prettier@3.9.3:
+    resolution: {integrity: sha512-HWmu+K+zvHNpaMfSnYeqdqrDbR16cuIXaPx8WoHaviQkDJh1/0BNtOZmHVQI5jc3wXv0H1yXc9wjvFdXh+n3hQ==}
     engines: {node: '>=14'}
     hasBin: true
 
@@ -4527,13 +4532,13 @@ snapshots:
 
   prelude-ls@1.2.1: {}
 
-  prettier-plugin-jsdoc@1.7.0(prettier@3.8.3):
+  prettier-plugin-jsdoc@1.7.0(prettier@3.9.3):
     dependencies:
       binary-searching: 2.0.5
       comment-parser: 1.4.1
       mdast-util-from-markdown: 2.0.2
-      prettier: 3.8.3
-      prettier-plugin-tailwindcss: 0.7.1(prettier-plugin-jsdoc@1.7.0(prettier@3.8.3))(prettier@3.8.3)
+      prettier: 3.9.3
+      prettier-plugin-tailwindcss: 0.7.1(prettier-plugin-jsdoc@1.7.0(prettier@3.9.3))(prettier@3.9.3)
     transitivePeerDependencies:
       - '@ianvs/prettier-plugin-sort-imports'
       - '@prettier/plugin-hermes'
@@ -4552,13 +4557,15 @@ snapshots:
       - prettier-plugin-svelte
       - supports-color
 
-  prettier-plugin-tailwindcss@0.7.1(prettier-plugin-jsdoc@1.7.0(prettier@3.8.3))(prettier@3.8.3):
+  prettier-plugin-tailwindcss@0.7.1(prettier-plugin-jsdoc@1.7.0(prettier@3.9.3))(prettier@3.9.3):
     dependencies:
-      prettier: 3.8.3
+      prettier: 3.9.3
     optionalDependencies:
-      prettier-plugin-jsdoc: 1.7.0(prettier@3.8.3)
+      prettier-plugin-jsdoc: 1.7.0(prettier@3.9.3)
 
   prettier@3.8.3: {}
+
+  prettier@3.9.3: {}
 
   pretty-ms@9.3.0:
     dependencies:
