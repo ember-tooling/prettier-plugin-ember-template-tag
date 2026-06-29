@@ -3,7 +3,7 @@ import { printers as prettierPrinters } from 'prettier/plugins/estree';
 
 import type { PluginOptions } from '../options.js';
 import { flattenDoc } from '../utils/doc.js';
-import type { NodeType } from '../utils/index.js';
+import type { NodeType, PrettierPrint } from '../utils/index.js';
 
 const printer = prettierPrinters['estree'] as Printer<NodeType>;
 
@@ -36,7 +36,7 @@ export function fixPreviousPrint(
   previousTemplatePrinted: AST.builders.Doc[],
   path: AstPath<NodeType>,
   options: PluginOptions,
-  print: (path: AstPath<NodeType>) => AST.builders.Doc,
+  print: PrettierPrint,
   args: unknown,
 ): void {
   const printedSemiFalse = printer.print(
