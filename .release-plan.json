@@ -2,17 +2,17 @@
   "solution": {
     "prettier-plugin-ember-template-tag": {
       "impact": "patch",
-      "oldVersion": "2.1.5",
-      "newVersion": "2.1.6",
+      "oldVersion": "2.1.6",
+      "newVersion": "2.1.7",
       "tagName": "latest",
       "constraints": [
         {
           "impact": "patch",
-          "reason": "Appears in changelog section :house: Internal"
+          "reason": "Appears in changelog section :bug: Bug Fix"
         }
       ],
       "pkgJSONPath": "./package.json"
     }
   },
-  "description": "## Release (2026-05-09)\n\n* prettier-plugin-ember-template-tag 2.1.6 (patch)\n\n#### :house: Internal\n* `prettier-plugin-ember-template-tag`\n  * [#447](https://github.com/ember-tooling/prettier-plugin-ember-template-tag/pull/447) Updated content-tag to 4.2.0 and @babel/traverse to 7.29.0 ([@ijlee2](https://github.com/ijlee2))\n  * [#436](https://github.com/ember-tooling/prettier-plugin-ember-template-tag/pull/436) fix: update snapshot to reflect export default in comment-with-template case ([@evoactivity](https://github.com/evoactivity))\n\n#### Committers: 2\n- Isaac Lee ([@ijlee2](https://github.com/ijlee2))\n- Liam ([@evoactivity](https://github.com/evoactivity))\n"
+  "description": "## Release (2026-07-02)\n\n* prettier-plugin-ember-template-tag 2.1.7 (patch)\n\n#### :bug: Bug Fix\n* `prettier-plugin-ember-template-tag`\n  * [#455](https://github.com/ember-tooling/prettier-plugin-ember-template-tag/pull/455) Don't merge lines if a comment breaks them up ([@evoactivity](https://github.com/evoactivity))\n\n#### Committers: 1\n- Liam ([@evoactivity](https://github.com/evoactivity))\n"
 }
