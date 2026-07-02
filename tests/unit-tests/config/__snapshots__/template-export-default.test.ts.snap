@@ -578,6 +578,17 @@ export default class PooComponent extends Component {
 "
 `;
 
+exports[`config > templateExportDefault: true > it formats ../cases/gts/issue-453.gts 1`] = `
+"export default <template>
+  <SomeComponent
+    @foo={{false}}
+    {{! @glint-expect-error }}
+    @bar={{false}}
+  />
+</template>
+"
+`;
+
 exports[`config > templateExportDefault: true > it formats ../cases/gts/js-only.gts 1`] = `
 "const num: number = 1;
 "

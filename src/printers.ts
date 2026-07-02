@@ -70,7 +70,7 @@ function getVisitorKeys(node: NodeType, nonTraversableKeys: Set<string>) {
 function print(
   path: AstPath<NodeType>,
   options: PluginOptions<NodeType>,
-  print: (path: AstPath<NodeType>) => AST.builders.Doc,
+  print: Parameters<Printer<NodeType>['print']>[2],
   args?: unknown,
 ) {
   const { node } = path;
