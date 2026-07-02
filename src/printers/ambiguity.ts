@@ -36,7 +36,7 @@ export function fixPreviousPrint(
   previousTemplatePrinted: AST.builders.Doc[],
   path: AstPath<NodeType>,
   options: PluginOptions,
-  print: (path: AstPath<NodeType>) => AST.builders.Doc,
+  print: Parameters<Printer<NodeType>['print']>[2],
   args: unknown,
 ): void {
   const printedSemiFalse = printer.print(
