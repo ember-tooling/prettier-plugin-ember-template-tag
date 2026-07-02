@@ -3,7 +3,7 @@ import { type AstPath, doc as AST } from 'prettier';
 import type { PluginOptions } from '../options.js';
 import { isGlimmerTemplate } from '../types/glimmer.js';
 import { assert } from '../utils/assert.js';
-import { flattenDoc } from '../utils/doc.js';
+import { flattenDoc, forceBreakGroupsWithComments } from '../utils/doc.js';
 import {
   type NodeType,
   TEMPLATE_TAG_CLOSE,
@@ -51,11 +51,24 @@ export async function printTemplateContent(
   ) => Promise<AST.builders.Doc>,
   options: PluginOptions,
 ): Promise<AST.builders.Doc> {
-  return await textToDoc(text.trim(), {
+  const content = await textToDoc(text.trim(), {
     ...options,
     parser: 'glimmer',
     singleQuote: options.templateSingleQuote ?? options.singleQuote,
   });
+
+  // When HBS comments ({{! ... }} or {{!-- ... --}}) appear between
+  // component attributes, the Glimmer printer may collapse the tag onto a
+  // single line if it fits within the print width. This breaks Glint
+  // annotations (e.g. {{! @glint-expect-error }}) that must stay on their
+  // own line between the attributes they annotate. Force any group that
+  // contains a comment to always break so the attributes are preserved on
+  // separate lines.
+  if (text.includes('{{!')) {
+    return forceBreakGroupsWithComments(content);
+  }
+
+  return content;
 }
 
 /**
