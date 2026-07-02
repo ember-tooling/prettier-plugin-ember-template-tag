@@ -3,7 +3,7 @@ import { type AstPath, doc as AST } from 'prettier';
 import type { PluginOptions } from '../options.js';
 import { isGlimmerTemplate } from '../types/glimmer.js';
 import { assert } from '../utils/assert.js';
-import { flattenDoc, forceBreakGroupsWithComments } from '../utils/doc.js';
+import { flattenDoc } from '../utils/doc.js';
 import {
   type NodeType,
   TEMPLATE_TAG_CLOSE,
@@ -51,24 +51,11 @@ export async function printTemplateContent(
   ) => Promise<AST.builders.Doc>,
   options: PluginOptions,
 ): Promise<AST.builders.Doc> {
-  const content = await textToDoc(text.trim(), {
+  return textToDoc(text.trim(), {
     ...options,
     parser: 'glimmer',
     singleQuote: options.templateSingleQuote ?? options.singleQuote,
   });
-
-  // When HBS comments ({{! ... }} or {{!-- ... --}}) appear between
-  // component attributes, the Glimmer printer may collapse the tag onto a
-  // single line if it fits within the print width. This breaks Glint
-  // annotations (e.g. {{! @glint-expect-error }}) that must stay on their
-  // own line between the attributes they annotate. Force any group that
-  // contains a comment to always break so the attributes are preserved on
-  // separate lines.
-  if (text.includes('{{!')) {
-    return forceBreakGroupsWithComments(content);
-  }
-
-  return content;
 }
 
 /**
@@ -83,9 +70,33 @@ export async function printTemplateContent(
 export function printTemplateTag(
   content: AST.builders.Doc,
 ): AST.builders.Doc[] {
-  const contents = flattenDoc(content);
+  const strings: string[] = [];
 
-  const useHardline = contents.some(
+  // Single pass: collect strings for the hardline/softline decision and
+  // simultaneously force any group that contains an HBS comment
+  // ({{! ... }} or {{!-- ... --}}) to always expand. This prevents the
+  // Glimmer printer from collapsing a component tag onto one line when a
+  // Glint annotation comment appears between its attributes.
+  const processedContent = AST.utils.mapDoc(content, (node) => {
+    if (typeof node === 'string') {
+      strings.push(node);
+    } else if (
+      node &&
+      typeof node === 'object' &&
+      'type' in node &&
+      node.type === 'group'
+    ) {
+      const groupStrings = flattenDoc(
+        (node as { contents: AST.builders.Doc }).contents,
+      );
+      if (groupStrings.some((s) => s.startsWith('{{!') || s.trim() === '!')) {
+        return { ...node, break: true };
+      }
+    }
+    return node;
+  });
+
+  const useHardline = strings.some(
     (c) =>
       // contains angle bracket tag
       /<.+>/.test(c) ||
@@ -96,7 +107,7 @@ export function printTemplateTag(
 
   const doc = [
     TEMPLATE_TAG_OPEN,
-    AST.builders.indent([line, AST.builders.group(content)]),
+    AST.builders.indent([line, AST.builders.group(processedContent)]),
     line,
     TEMPLATE_TAG_CLOSE,
   ];
