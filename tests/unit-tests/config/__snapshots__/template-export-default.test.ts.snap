@@ -81,6 +81,24 @@ class MyComponent extends Component {
 "
 `;
 
+exports[`config > templateExportDefault: true > it formats ../cases/gjs/component-class-with-required-semi-before-template.gjs 1`] = `
+"import Component from "@glimmer/component";
+
+/** It's a component */
+class MyComponent extends Component {
+  get rows() {
+    return 5;
+  }
+
+  historyBack = () => history.back();
+
+  <template>
+    <h1>Class top level template.</h1>
+  </template>
+}
+"
+`;
+
 exports[`config > templateExportDefault: true > it formats ../cases/gjs/component-class-with-template-literal.gjs 1`] = `
 "import Component from "@glimmer/component";
 
